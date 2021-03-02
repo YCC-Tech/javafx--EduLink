@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <left>
+      <Pane fx:id="leftSideMenu" prefHeight="651.0" prefWidth="200.0" styleClass="leftSideMenu" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="104.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="23.0" text="EduLink" textFill="#3367d6">
+                     <font>
+                        <Font name="System Bold Italic" size="31.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="57.0" text="Management System" textFill="#3367d6">
+                     <font>
+                        <Font name="System Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <VBox layoutY="104.0" prefHeight="323.0" prefWidth="200.0">
+               <children>
+                  <Pane id="studentMenuItem" onMouseClicked="#home" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                     <children>
+                        <Pane layoutX="21.0" layoutY="16.0" prefHeight="29.0" prefWidth="32.0" styleClass="studentIcon" />
+                        <Label layoutX="56.0" layoutY="17.0" styleClass="studentLabel" text="Students">
+                           <font>
+                              <Font name="Oswald Regular" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane onMouseClicked="#page1" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                     <children>
+                        <Label layoutX="55.0" layoutY="16.0" text="Transactions">
+                           <font>
+                              <Font name="Oswald Regular" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="lefSideMenuItem" />
+                              <String fx:value="transactionLabel" />
+                           </styleClass>
+                        </Label>
+                        <Pane layoutX="21.0" layoutY="19.0" prefHeight="29.0" prefWidth="32.0" styleClass="transactionIcon" />
+                     </children>
+                  </Pane>
+                  <Pane onMouseClicked="#page2" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                     <children>
+                        <Label layoutX="55.0" layoutY="18.0" text="Donators">
+                           <font>
+                              <Font name="Oswald Regular" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="lefSideMenuItem" />
+                              <String fx:value="donatorLabel" />
+                           </styleClass>
+                        </Label>
+                        <Pane layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="donatorIcon" />
+                     </children>
+                  </Pane>
+                  <Pane onMouseClicked="#page3" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                     <children>
+                        <Label layoutX="55.0" layoutY="18.0" text="Reports">
+                           <font>
+                              <Font name="Oswald Regular" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="lefSideMenuItem" />
+                              <String fx:value="reportLabel" />
+                           </styleClass>
+                        </Label>
+                        <Pane layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="reportIcon" />
+                     </children>
+                  </Pane>
+                  <Pane onMouseClicked="#page4" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                     <children>
+                        <Label layoutX="55.0" layoutY="18.0" text="Admins">
+                           <font>
+                              <Font name="Oswald Regular" size="16.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="lefSideMenuItem" />
+                              <String fx:value="adminLabel" />
+                           </styleClass>
+                        </Label>
+                        <Pane layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="adminIcon" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+            <Label layoutX="27.0" layoutY="619.0" text="UT-YCC Tech" textFill="#7d6fff">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="602.0" text="proudly developed by" textFill="#a1bbff" />
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="200.0" styleClass="contentArea" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="386.0" layoutY="317.0" text="Home..." />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
