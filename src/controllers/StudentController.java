@@ -88,6 +88,7 @@ public class StudentController implements Initializable {
 	private List<Label> menuLabels;
 	private List<Pane> menuIcons;
 	
+	/* Close and Minimize Buttons */
     @FXML
     void processCloseWindow(MouseEvent event) {
     	Stage stage = (Stage) btnCloseWindow.getScene().getWindow();
@@ -100,6 +101,7 @@ public class StudentController implements Initializable {
     	stage.setIconified(true);
     }
 
+    /* Left Side Bar Menu Buttons */
 	@FXML
 	void processStudentsMenuItem(MouseEvent event) {
 		 bp.setCenter(ap);
@@ -126,6 +128,7 @@ public class StudentController implements Initializable {
 		loadPage("Admins", adminsMenuItem, lblAdmins, menuItemIconAdmins);
 	}
 
+	/* Dynamically load page based on left menu item on click */
 	private void loadPage(String page, Pane menuItem, Label menuLabel, Pane menuIcon) {
 		Parent root = null;
 
@@ -136,10 +139,10 @@ public class StudentController implements Initializable {
 		}
 
 		changeMenuItemsApperance(menuItem, menuLabel, menuIcon);
-
 		bp.setCenter(root);
 	}
 
+	/* Tweak left menu buttons active style */
 	private void changeMenuItemsApperance(Pane menuItem, Label menuLabel, Pane menuIcon) {
 		
 		menuItems.forEach(item -> {
@@ -181,6 +184,7 @@ public class StudentController implements Initializable {
 	    List<Pane> sideMenuIcons = Arrays.asList(menuItemIconStudents, menuItemIconTransactions, menuItemIconDonators, menuItemIconReports, menuItemIconAdmins);
 	    menuIcons = sideMenuIcons;
 	    
+	    /* Student Tab is firstly loaded */
 	    changeMenuItemsApperance(studentsMenuItem, lblStudents, menuItemIconStudents);
 	}
 
