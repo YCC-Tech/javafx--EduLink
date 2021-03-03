@@ -21,6 +21,22 @@ public class Main extends Application {
 
 			Parent root = FXMLLoader.load(getClass().getResource("/resources/pages/Home.fxml"));
 
+			root.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					xOffset = primaryStage.getX() - event.getScreenX();
+					yOffset = primaryStage.getY() - event.getScreenY();
+				}
+			});
+
+			root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					primaryStage.setX(event.getScreenX() + xOffset);
+					primaryStage.setY(event.getScreenY() + yOffset);
+				}
+			});
+
 			Scene scene = new Scene(root);
 
 			scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
