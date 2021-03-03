@@ -11,12 +11,14 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class StudentController implements Initializable {
 	@FXML
@@ -73,13 +75,34 @@ public class StudentController implements Initializable {
     @FXML
     private AnchorPane ap;
 
+    @FXML
+    private BorderPane bpInside;
+    
+    @FXML
+    private Pane btnCloseWindow;
+
+    @FXML
+    private Pane btnMinimizeWindow;
+
 	private List<Pane> menuItems;
 	private List<Label> menuLabels;
 	private List<Pane> menuIcons;
+	
+    @FXML
+    void processCloseWindow(MouseEvent event) {
+    	Stage stage = (Stage) btnCloseWindow.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    void processMinimizeWindow(MouseEvent event) {
+    	Stage stage = (Stage) btnMinimizeWindow.getScene().getWindow(); 
+    	stage.setIconified(true);
+    }
 
 	@FXML
 	void processStudentsMenuItem(MouseEvent event) {
-		bp.setCenter(ap);
+		 bp.setCenter(ap);
 		changeMenuItemsApperance(studentsMenuItem, lblStudents, menuItemIconStudents);
 	}
 

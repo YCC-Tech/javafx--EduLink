@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -82,12 +84,12 @@
                   </Pane>
                </children>
             </VBox>
-            <Label layoutX="27.0" layoutY="619.0" styleClass="teamName" text="UT-YCC Tech" textFill="#7d6fff">
+            <Label layoutX="27.0" layoutY="573.0" styleClass="teamName" text="UT-YCC Tech" textFill="#7d6fff">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="27.0" layoutY="602.0" styleClass="proudlyDevelopedText" text="proudly developed by">
+            <Label layoutX="27.0" layoutY="556.0" styleClass="proudlyDevelopedText" text="proudly developed by">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -104,7 +106,7 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-            <Line endX="12.0" layoutX="165.0" layoutY="629.0" startX="-62.0">
+            <Line endX="12.0" layoutX="165.0" layoutY="583.0" startX="-62.0">
                <stroke>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -132,4 +134,25 @@
          </children>
       </AnchorPane>
    </center>
+   <top>
+      <Pane prefHeight="31.0" prefWidth="1000.0" styleClass="titleBar" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="btnCloseWindow" layoutX="954.0" onMouseClicked="#processCloseWindow" prefHeight="31.0" prefWidth="46.0" styleClass="btnCloseWindow">
+               <children>
+                  <Pane layoutX="17.0" layoutY="10.0" prefHeight="29.0" prefWidth="32.0" styleClass="btnCloseWindowIcon" />
+               </children>
+            </Pane>
+            <Pane layoutX="-1.0" layoutY="-4.0" prefHeight="37.0" prefWidth="201.0" styleClass="blockAboveTitle" />
+            <Pane fx:id="btnMinimizeWindow" layoutX="910.0" onMouseClicked="#processMinimizeWindow" prefHeight="31.0" prefWidth="46.0" styleClass="btnMinimizeWindow">
+               <children>
+                  <ImageView fitHeight="19.0" fitWidth="28.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/minimize.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </top>
 </BorderPane>
