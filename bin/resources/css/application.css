@@ -1,3 +1,11 @@
+@font-face {
+    src: url("../fonts/cerebrisans-regular.ttf");
+}
+
+.root {
+    -fx-font-family: "Cerebri Sans"; /* this name is from font file */
+}
+
 /* START - Left Side Bar Content */
 .leftSideMenu {
 	/* -fx-background-color: linear-gradient(to top, #3367D6, #189AEC); */
@@ -11,10 +19,12 @@
 
 .subTitleLogo {
 	-fx-text-fill: white;
+	-fx-font-family: "Cerebri Sans";
 }
 
 .proudlyDevelopedText {
 	-fx-text-fill: #F2F2F2;
+	-fx-font-family: "Cerebri Sans";
 }
 
 .teamName {
@@ -173,6 +183,8 @@
 
 .leftSideMenuLabel {
 	-fx-text-fill: #fff;
+	-fx-font-family: "Cerebri Sans";
+	-fx-font-size: 17px;
 }
 
 /* END - Left Side Bar Content  */

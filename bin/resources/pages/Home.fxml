@@ -17,9 +17,9 @@
          <children>
             <AnchorPane prefHeight="104.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="25.0" layoutY="23.0" styleClass="titleLogo" text="EduLink">
+                  <Label layoutX="24.0" layoutY="19.0" styleClass="titleLogo" text="EduLink">
                      <font>
-                        <Font name="System Bold" size="31.0" />
+                        <Font name="System Bold" size="34.0" />
                      </font>
                   </Label>
                   <Label layoutX="25.0" layoutY="58.0" styleClass="subTitleLogo" text="Management System" textFill="#3367d6">
@@ -32,10 +32,10 @@
                <children>
                   <Pane id="studentsMenuItem" fx:id="studentsMenuItem" onMouseClicked="#processStudentsMenuItem" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
                      <children>
-                        <Pane fx:id="menuItemIconStudents" layoutX="21.0" layoutY="16.0" prefHeight="29.0" prefWidth="32.0" styleClass="studentIcon" />
+                        <Pane fx:id="menuItemIconStudents" layoutX="21.0" layoutY="15.0" prefHeight="29.0" prefWidth="32.0" styleClass="studentIcon" />
                         <Label fx:id="lblStudents" layoutX="56.0" layoutY="17.0" styleClass="leftSideMenuLabel" text="Students">
                            <font>
-                              <Font name="Oswald Regular" size="16.0" />
+                              <Font size="16.0" />
                            </font>
                         </Label>
                      </children>
@@ -47,7 +47,7 @@
                               <Font name="Oswald Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="menuItemIconTransactions" layoutX="21.0" layoutY="19.0" prefHeight="29.0" prefWidth="32.0" styleClass="transactionIcon" />
+                        <Pane fx:id="menuItemIconTransactions" layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="transactionIcon" />
                      </children>
                   </Pane>
                   <Pane id="donatorsMenuItem" fx:id="donatorsMenuItem" onMouseClicked="#processDonatorsMenuItem" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
@@ -57,7 +57,7 @@
                               <Font name="Oswald Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="menuItemIconDonators" layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="donatorIcon" />
+                        <Pane fx:id="menuItemIconDonators" layoutX="21.0" layoutY="17.0" prefHeight="29.0" prefWidth="32.0" styleClass="donatorIcon" />
                      </children>
                   </Pane>
                   <Pane id="reportsMenuItem" fx:id="reportsMenuItem" onMouseClicked="#processReportsMenuItem" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
@@ -67,7 +67,7 @@
                               <Font name="Oswald Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="menuItemIconReports" layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="reportIcon" />
+                        <Pane fx:id="menuItemIconReports" layoutX="21.0" layoutY="17.0" prefHeight="29.0" prefWidth="32.0" styleClass="reportIcon" />
                      </children>
                   </Pane>
                   <Pane id="adminsMenuItem" fx:id="adminsMenuItem" onMouseClicked="#processAdminsMenuItem" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
@@ -77,7 +77,7 @@
                               <Font name="Oswald Regular" size="16.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="menuItemIconAdmins" layoutX="21.0" layoutY="18.0" prefHeight="29.0" prefWidth="32.0" styleClass="adminIcon" />
+                        <Pane fx:id="menuItemIconAdmins" layoutX="21.0" layoutY="17.0" prefHeight="29.0" prefWidth="32.0" styleClass="adminIcon" />
                      </children>
                   </Pane>
                </children>
