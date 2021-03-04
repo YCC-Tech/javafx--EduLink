@@ -34,7 +34,7 @@ In this docs, we are going to state the naming convention we used in this projec
 
 | Use case      | Convention          | Example          |
 | ------------- | ------------------- | ---------------- |
-| database name | underscore          | utycc_sms        |
+| database name | underscore          | library_db        |
 | table name    | plural underscore   | attendance_years |
 | column name   | singular underscore | father_name      |
 
