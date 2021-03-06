@@ -1,6 +1,5 @@
 package application;
 
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -21,13 +20,13 @@ public class Main extends Application {
 		try {
 			/* Remove original title bar and windows control buttons */
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			
+
 			/* Restrict windows to be resizable */
 			primaryStage.setResizable(false);
 
 			Parent root = FXMLLoader.load(getClass().getResource("/resources/pages/Students.fxml"));
-			root.setStyle("-fx-background-color: transparent; "); 
-			
+			root.setStyle("-fx-background-color: transparent; ");
+
 			/* Make window to be draggable */
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {
 				@Override
@@ -45,10 +44,10 @@ public class Main extends Application {
 			});
 
 			Scene scene = new Scene(root);
-			
+
 			JMetro jMetro = new JMetro(Style.LIGHT);
 			jMetro.setScene(scene);
-			
+
 			scene.setFill(Color.TRANSPARENT);
 			scene.getStylesheets().add(getClass().getResource("/resources/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);

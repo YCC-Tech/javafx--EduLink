@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
-
 
 <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions" />
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <ComboBox layoutX="626.0" layoutY="27.0" prefWidth="150.0" />
+            <ComboBox layoutX="468.0" layoutY="27.0" prefWidth="150.0" />
+            <TableView layoutX="12.0" layoutY="66.0" prefHeight="533.0" prefWidth="765.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="No" />
+                <TableColumn prefWidth="389.0" text="University" />
+                  <TableColumn minWidth="0.0" prefWidth="138.0" text="Region" />
+                  <TableColumn prefWidth="135.0" text="Student Count" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </children>
 </HBox>
