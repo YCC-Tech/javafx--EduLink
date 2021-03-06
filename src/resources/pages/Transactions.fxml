@@ -4,26 +4,32 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 
-<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TransactionController">
+
+<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TransactionController">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
             <ComboBox fx:id="cbMonths" layoutX="419.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" promptText="Month" />
             <ComboBox fx:id="cbYears" layoutX="311.0" layoutY="25.0" prefHeight="30.0" prefWidth="100.0" promptText="Years" style="-fx-border-width: 1;" />
-            <TableView fx:id="tbUniversities" layoutX="12.0" layoutY="72.0" maxHeight="-Infinity" prefWidth="765.0">
-              <columns>
-                <TableColumn fx:id="tbcolNo" prefWidth="55.0" styleClass="tableColumnCenterText" text="No" />
-                <TableColumn fx:id="tbcolUniversity" prefWidth="325.0" text="University" />
+            <TableView fx:id="tbUniversities" layoutX="12.0" layoutY="72.0" maxHeight="-Infinity" prefHeight="243.0" prefWidth="770.0">
+               <columns>
+                  <TableColumn fx:id="tbcolNo" prefWidth="55.0" styleClass="tableColumnCenterText" text="No" />
+                  <TableColumn fx:id="tbcolUniversity" prefWidth="325.0" text="University" />
                   <TableColumn fx:id="tbcolUniversityShortName" minWidth="0.0" prefWidth="131.0" text="Short Name" />
                   <TableColumn fx:id="tbcolRegion" prefWidth="117.0" text="Region" />
                   <TableColumn fx:id="tbcolStudentCount" prefWidth="126.0" styleClass="tableColumnCenterText" text="Student Count" />
-              </columns>
+               </columns>
             </TableView>
             <TextField fx:id="tfSearchUniversity" layoutX="557.0" layoutY="25.0" prefHeight="30.0" prefWidth="220.0" promptText="Search . . ." />
+            <AnchorPane fx:id="apTransactionsPage" layoutX="13.0" prefHeight="435.0" prefWidth="764.0" style="-fx-background-color: white;">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
-</HBox>
+</AnchorPane>

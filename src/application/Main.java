@@ -1,5 +1,7 @@
 package application;
 
+import com.kieferlam.javafxblur.Blur;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -53,12 +55,14 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
+			// Blur.applyBlur(primaryStage, Blur.ACRYLIC);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
+		// Blur.loadBlurLibrary();
 		launch(args);
 	}
 }

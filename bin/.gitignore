@@ -1,5 +1,3 @@
-/resources/
-/controllers/
-/dto/
-/models/
 /application/
+/controllers/
+/resources/

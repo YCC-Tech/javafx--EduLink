@@ -4,18 +4,26 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.kieferlam.javafxblur.Blur;
+
 import dto.University;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import models.UniversityModel;
 
 public class TransactionController implements Initializable {
@@ -46,6 +54,11 @@ public class TransactionController implements Initializable {
 
     @FXML
     private TextField tfSearchUniversity;
+    
+    @FXML
+    private AnchorPane apTransactionsPage;
+    
+    TranslateTransition slide = new TranslateTransition();
     
     private void loadUniversityTable() {
     	tbcolNo.setCellValueFactory(new PropertyValueFactory<>("universityId"));
@@ -93,6 +106,26 @@ public class TransactionController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    
+    private void detectDoubleClickOnTableRow() {
+    	tbUniversities.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() == 2) {
+                // System.out.println(tbUniversities.getSelectionModel().getSelectedItem());
+            	translatePane();
+            }
+        });
+    };
+    
+    private void translatePane() {
+    	slide.setDuration(Duration.seconds(0.2));
+    	slide.setNode(apTransactionsPage);
+    	
+    	slide.setToY(-31);
+    	slide.play();
+    	
+    	
+    	apTransactionsPage.setTranslateY(500);
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -106,6 +139,12 @@ public class TransactionController implements Initializable {
 		
 		/* load data into university table */
 		loadUniversityTable();
+		
+		/* deteact double click on table row */
+		detectDoubleClickOnTableRow();
+		
+		/* ------------------ */
+		apTransactionsPage.setTranslateY(-500);
 	}
 
 }

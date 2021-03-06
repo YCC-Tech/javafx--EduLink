@@ -243,4 +243,8 @@
 .tableColumnCenterText {
 	-fx-alignment: center;
 }
+
+.panelSlide {
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0.0, 0.0);
+}
 /* END - Transaction Page */
