@@ -238,3 +238,9 @@
 }
 
 /* END - Left Side Bar Content  */
+
+/* START - Transaction Page */
+.tableColumnCenterText {
+	-fx-alignment: center;
+}
+/* END - Transaction Page */
