@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TransactionController">
+<StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TransactionController">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
-            <ComboBox fx:id="cbMonths" layoutX="419.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" promptText="Month" />
-            <ComboBox fx:id="cbYears" layoutX="311.0" layoutY="25.0" prefHeight="30.0" prefWidth="100.0" promptText="Years" style="-fx-border-width: 1;" />
+            <ComboBox fx:id="cbMonths" layoutX="424.0" layoutY="25.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="130.0" promptText="Month" />
+            <ComboBox fx:id="cbYears" layoutX="318.0" layoutY="25.0" prefHeight="30.0" prefWidth="100.0" promptText="Years" style="-fx-border-width: 1;" />
             <TableView fx:id="tbUniversities" layoutX="12.0" layoutY="72.0" maxHeight="-Infinity" prefHeight="243.0" prefWidth="770.0">
                <columns>
                   <TableColumn fx:id="tbcolNo" prefWidth="55.0" styleClass="tableColumnCenterText" text="No" />
@@ -23,13 +27,43 @@
                   <TableColumn fx:id="tbcolStudentCount" prefWidth="126.0" styleClass="tableColumnCenterText" text="Student Count" />
                </columns>
             </TableView>
-            <TextField fx:id="tfSearchUniversity" layoutX="557.0" layoutY="25.0" prefHeight="30.0" prefWidth="220.0" promptText="Search . . ." />
-            <AnchorPane fx:id="apTransactionsPage" layoutX="13.0" prefHeight="312.0" prefWidth="764.0" style="-fx-background-color: white;">
-               <effect>
-                  <GaussianBlur radius="63.0" />
-               </effect>
+            <TextField fx:id="tfSearchUniversity" layoutX="562.0" layoutY="25.0" prefHeight="30.0" prefWidth="220.0" promptText="Search . . ." />
+            <AnchorPane fx:id="apTransactionsPage" layoutX="28.0" layoutY="-1.0" prefHeight="479.0" prefWidth="738.0" style="-fx-background-color: white;">
+               <styleClass>
+                  <String fx:value="apUpTransaction" />
+                  <String fx:value="bg-white" />
+                  <String fx:value="drop-shadow" />
+                  <String fx:value="border-sm" />
+               </styleClass>
+               <children>
+                  <Pane layoutX="688.0" layoutY="13.0" onMouseClicked="#processCloseUpSlide" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
+                     <children>
+                        <Pane layoutX="8.0" layoutY="8.0" prefHeight="30.0" prefWidth="29.0" styleClass="btn-close-sm" />
+                     </children>
+                  </Pane>
+                  <Label fx:id="lblUniversityName" layoutX="26.0" layoutY="69.0" prefHeight="20.0" prefWidth="355.0" text="University Name" />
+                  <ComboBox fx:id="cbAttendanceYears" layoutX="387.0" layoutY="61.0" prefHeight="30.0" prefWidth="136.0" promptText="Attendance Year" />
+                  <Label fx:id="lblUniversityShortName" layoutX="26.0" layoutY="38.0" prefHeight="32.0" prefWidth="226.0" text="University Short Name">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tbStudentsTransactions" layoutX="26.0" layoutY="101.0" prefHeight="223.0" prefWidth="686.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="No" />
+                      <TableColumn prefWidth="165.0" text="Name" />
+                        <TableColumn prefWidth="123.0" text="NRC" />
+                        <TableColumn prefWidth="166.0" text="Remark" />
+                        <TableColumn prefWidth="151.0" text="Withdraw Status" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="26.0" layoutY="334.0" text="Scholar Amount:" />
+                  <Label fx:id="lblScholarAmount" layoutX="121.0" layoutY="334.0" prefHeight="17.0" prefWidth="83.0" text="150,000 Mmk" />
+                  <Button layoutX="611.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Save" textFill="WHITE" />
+                  <TextField layoutX="530.0" layoutY="61.0" prefHeight="30.0" prefWidth="181.0" promptText="Search . . ." />
+               </children>
             </AnchorPane>
          </children>
       </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

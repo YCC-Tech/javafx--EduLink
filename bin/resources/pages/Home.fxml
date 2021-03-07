@@ -128,7 +128,6 @@
 							<Pane layoutX="17.0" layoutY="10.0" prefHeight="29.0" prefWidth="32.0" styleClass="btnCloseWindowIcon" />
 						</children>
 					</Pane>
-					<Pane prefHeight="33.0" prefWidth="200.0" styleClass="blockAboveTitle" />
 					<Pane fx:id="btnMinimizeWindow" layoutX="900.0" onMouseClicked="#processMinimizeWindow" prefHeight="31.0" prefWidth="46.0" styleClass="btnMinimizeWindow">
 						<children>
 							<ImageView fitHeight="19.0" fitWidth="28.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
@@ -138,6 +137,7 @@
 							</ImageView>
 						</children>
 					</Pane>
+					<Pane prefHeight="33.0" prefWidth="200.0" styleClass="blockAboveTitle" />
 				</children>
 			</Pane>
 		</top>

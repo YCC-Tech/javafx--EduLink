@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -58,6 +59,15 @@ public class TransactionController implements Initializable {
     @FXML
     private AnchorPane apTransactionsPage;
     
+    @FXML
+    private Label lblUniversityName;
+    
+    @FXML
+    private Label lblUniversityShortName;
+
+    @FXML
+    private ComboBox<String> cbAttendanceYears;
+  
     TranslateTransition slide = new TranslateTransition();
     
     private void loadUniversityTable() {
@@ -110,21 +120,35 @@ public class TransactionController implements Initializable {
     private void detectDoubleClickOnTableRow() {
     	tbUniversities.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() == 2) {
-                // System.out.println(tbUniversities.getSelectionModel().getSelectedItem());
+                University selectedData = tbUniversities.getSelectionModel().getSelectedItem();
+            	
+                lblUniversityName.setText(selectedData.getName());
+                lblUniversityShortName.setText(selectedData.getShortName());
+            	
             	translatePane();
             }
         });
     };
     
     private void translatePane() {
-    	slide.setDuration(Duration.seconds(0.2));
+    	slide.setDuration(Duration.seconds(0.3));
     	slide.setNode(apTransactionsPage);
     	
-    	slide.setToY(-31);
+    	slide.setToY(-30);
+    	slide.play();
+    	apTransactionsPage.setTranslateY(-700);
+    	
+    }
+    
+    @FXML
+    void processCloseUpSlide(MouseEvent event) {
+    	slide.setDuration(Duration.seconds(0.3));
+    	slide.setNode(apTransactionsPage);
+    	
+    	slide.setToY(-700);
     	slide.play();
     	
-    	
-    	apTransactionsPage.setTranslateY(500);
+    	apTransactionsPage.setTranslateY(-30);
     }
 
 	@Override
@@ -144,7 +168,7 @@ public class TransactionController implements Initializable {
 		detectDoubleClickOnTableRow();
 		
 		/* ------------------ */
-		apTransactionsPage.setTranslateY(-500);
+		apTransactionsPage.setTranslateY(-700);
 	}
 
 }

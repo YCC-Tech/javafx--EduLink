@@ -184,6 +184,9 @@ public class StudentController implements Initializable {
 	    List<Pane> sideMenuIcons = Arrays.asList(menuItemIconStudents, menuItemIconTransactions, menuItemIconDonators, menuItemIconReports, menuItemIconAdmins);
 	    menuIcons = sideMenuIcons;
 	    
+	    btnCloseWindow.setViewOrder(0.0);
+	    btnMinimizeWindow.setViewOrder(0.0);
+	    
 	    /* Student Tab is firstly loaded */
 	    changeMenuItemsApperance(studentsMenuItem, lblStudents, menuItemIconStudents);
 	}

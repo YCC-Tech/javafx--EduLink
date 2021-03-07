@@ -1,3 +1,36 @@
+/* Utilities Classes */
+.bg-white {
+	-fx-background-color: white;
+}
+
+.drop-shadow {
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 30, 0.5, 0.5, 0.5); 
+}
+
+.border-sm {
+	-fx-border-radius: 0 0 3 3;
+	-fx-padding: 5;
+	-fx-background-radius: 0 0 3 3;
+}
+
+.btn-close-sm {
+	-icon-paint: #4B4F52;
+    -fx-background-color: -icon-paint;
+    -size: 8;
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+    -fx-shape: "M23.707.293h0a1,1,0,0,0-1.414,0L12,10.586,1.707.293a1,1,0,0,0-1.414,0h0a1,1,0,0,0,0,1.414L10.586,12,.293,22.293a1,1,0,0,0,0,1.414h0a1,1,0,0,0,1.414,0L12,13.414,22.293,23.707a1,1,0,0,0,1.414,0h0a1,1,0,0,0,0-1.414L13.414,12,23.707,1.707A1,1,0,0,0,23.707.293Z"
+}
+
+.rounded {
+	-fx-border-radius: 50%;
+	-fx-padding: 5;
+	-fx-background-radius: 50%;
+}
+/* End - Utilities Classes */
+
 @font-face {
     src: url("../fonts/cerebrisans-regular.ttf");
 }
@@ -248,3 +281,4 @@
 	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0.0, 0.0);
 }
 /* END - Transaction Page */
+
