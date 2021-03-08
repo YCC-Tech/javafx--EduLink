@@ -1,3 +1,11 @@
+@font-face {
+    src: url("../fonts/cerebrisans-regular.ttf");
+}
+
+.basePane {
+	
+}
+
 /* Utilities Classes */
 .bg-white {
 	-fx-background-color: white;
@@ -35,14 +43,6 @@
 	-fx-text-fill: #1990E0;
 }
 /* End - Utilities Classes */
-
-@font-face {
-    src: url("../fonts/cerebrisans-regular.ttf");
-}
-
-.basePane {
-	
-}
 
 .baseBorderPane {
 	-fx-background-color: white;

@@ -31,7 +31,7 @@
             <TextField fx:id="tfSearchUniversity" layoutX="562.0" layoutY="25.0" prefHeight="30.0" prefWidth="220.0" promptText="Search . . ." />
             <Label layoutX="12.0" layoutY="318.0" prefHeight="17.0" prefWidth="194.0" text="Double click on row to view more." textFill="#979797" />
             <Label fx:id="lblErrorMsgOnTransactionPage" layoutX="250.0" layoutY="6.0" prefHeight="17.0" prefWidth="235.0" textFill="#ffa8a8" />
-            <AnchorPane fx:id="apTransactionsPage" layoutX="30.0" prefHeight="479.0" prefWidth="169.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="apTransactionsPage" layoutX="11.0" prefHeight="565.0" prefWidth="770.0" style="-fx-background-color: white;">
                <styleClass>
                   <String fx:value="apUpTransaction" />
                   <String fx:value="bg-white" />
@@ -39,31 +39,32 @@
                   <String fx:value="border-sm" />
                </styleClass>
                <children>
-                  <Pane layoutX="688.0" layoutY="13.0" onMouseClicked="#processCloseUpSlide" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
+                  <Pane layoutX="717.0" layoutY="13.0" onMouseClicked="#processCloseUpSlide" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
                      <children>
                         <Pane layoutX="8.0" layoutY="8.0" prefHeight="30.0" prefWidth="29.0" styleClass="btn-close-sm" />
                      </children>
                   </Pane>
-                  <Label fx:id="lblUniversityName" layoutX="26.0" layoutY="69.0" prefHeight="20.0" prefWidth="355.0" text="University Name" />
-                  <ComboBox fx:id="cbAttendanceYears" layoutX="387.0" layoutY="61.0" prefHeight="30.0" prefWidth="136.0" promptText="Attendance Year" />
+                  <Label fx:id="lblUniversityName" layoutX="26.0" layoutY="69.0" prefHeight="20.0" prefWidth="334.0" text="University Name" />
+                  <ComboBox fx:id="cbAttendanceYears" layoutX="367.0" layoutY="61.0" prefHeight="30.0" prefWidth="194.0" promptText="All" />
                   <Label fx:id="lblUniversityShortName" layoutX="26.0" layoutY="38.0" prefHeight="32.0" prefWidth="226.0" text="University Short Name">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tbStudentsTransactions" layoutX="26.0" layoutY="101.0" prefHeight="223.0" prefWidth="686.0">
+                  <TableView fx:id="tbStudentsTransactions" layoutX="26.0" layoutY="101.0" prefHeight="420.0" prefWidth="718.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="No" />
-                      <TableColumn prefWidth="165.0" text="Name" />
-                        <TableColumn prefWidth="123.0" text="NRC" />
-                        <TableColumn prefWidth="166.0" text="Remark" />
-                        <TableColumn prefWidth="151.0" text="Withdraw Status" />
+                      <TableColumn fx:id="studentId" prefWidth="55.0" text="No" />
+                      <TableColumn fx:id="name" prefWidth="169.0" text="Name" />
+                        <TableColumn fx:id="nrc" prefWidth="157.0" text="NRC" />
+                        <TableColumn fx:id="remark" prefWidth="154.0" text="Remark" />
+                        <TableColumn fx:id="withdrawStatus" prefWidth="164.0" text="Withdraw Status" />
                     </columns>
                   </TableView>
-                  <Label layoutX="26.0" layoutY="334.0" text="Scholar Amount:" />
-                  <Label fx:id="lblScholarAmount" layoutX="121.0" layoutY="334.0" prefHeight="17.0" prefWidth="83.0" text="150,000 Mmk" />
-                  <Button layoutX="611.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Save" textFill="WHITE" />
-                  <TextField layoutX="530.0" layoutY="61.0" prefHeight="30.0" prefWidth="181.0" promptText="Search . . ." />
+                  <Label layoutX="26.0" layoutY="525.0" text="Scholar Amount:" />
+                  <Label fx:id="lblScholarAmount" layoutX="121.0" layoutY="525.0" prefHeight="17.0" prefWidth="83.0" text="150,000 Mmk" />
+                  <Button layoutX="644.0" layoutY="530.0" mnemonicParsing="false" onAction="#processSave" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Save" textFill="WHITE" />
+                  <TextField layoutX="565.0" layoutY="61.0" prefHeight="30.0" prefWidth="177.0" promptText="Search . . ." />
+                  <Label layoutX="366.0" layoutY="41.0" prefHeight="17.0" prefWidth="117.0" text="Attendance Year" />
                </children>
             </AnchorPane>
          </children>

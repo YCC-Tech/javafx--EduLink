@@ -7,8 +7,15 @@ import java.util.ResourceBundle;
 import com.kieferlam.javafxblur.Blur;
 
 import Utilities.MutateMonth;
+import javafx.scene.control.CheckBox;
+import models.TransactionModel;
+import dto.ScholarTransaction;
+import dto.AttendanceYear;
+import dto.ScholarAmount;
 import dto.University;
 import javafx.animation.TranslateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,6 +33,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import models.AttendanceYearModel;
+import models.ScholarAmountModel;
 import models.UniversityModel;
 
 public class TransactionController implements Initializable {
@@ -36,6 +45,9 @@ public class TransactionController implements Initializable {
 	@FXML
 	private ComboBox<String> cbYears;
 
+	@FXML
+	private TableView<ScholarTransaction> tbStudentsTransactions;
+	
 	@FXML
 	private TableView<University> tbUniversities;
 
@@ -65,12 +77,32 @@ public class TransactionController implements Initializable {
 
 	@FXML
 	private Label lblUniversityShortName;
+	
+	@FXML
+	private Label lblScholarAmount;
 
 	@FXML
 	private ComboBox<String> cbAttendanceYears;
-	
+
 	@FXML
 	private Label lblErrorMsgOnTransactionPage;
+	
+	@FXML
+    private TableColumn<ScholarTransaction, Integer> studentId;
+
+    @FXML
+    private TableColumn<ScholarTransaction, String> name;
+
+    @FXML
+    private TableColumn<ScholarTransaction, String>  nrc;
+
+    @FXML
+    private TableColumn<ScholarTransaction, TextField> remark;
+
+    @FXML
+    private TableColumn<ScholarTransaction, CheckBox> withdrawStatus;
+	
+	TransactionModel scholarTransactionUtil = new TransactionModel();
 
 	TranslateTransition slide = new TranslateTransition();
 	String currentSelectedYear;
@@ -136,9 +168,83 @@ public class TransactionController implements Initializable {
 				lblUniversityShortName.setText(selectedData.getShortName());
 
 				translatePane();
+
+				fillAttendanceYearsOnPane(selectedData.getUniversityId());
+
+				setScholarAmount(selectedData.getUniversityId());
+				
+				// ---
+				showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id FROM students s,enrollments e where e.university_id='"+ selectedData.getUniversityId() +"' and e.is_active='1' and s.student_id= e.student_id;");
+				
+				int universityId = selectedData.getUniversityId();
+				// combobox attendance year on change
+				cbAttendanceYears.valueProperty().addListener(new ChangeListener<String>() {
+
+					@Override
+					public void changed(ObservableValue<? extends String> observableValue, String oldAcademicYear, String newAcademicYear) {
+						
+						try {
+							// int scholarAmt = scholarTransactionUtil.getScholarAmount(universityId, newAcademicYear);
+							int academicYearId = scholarTransactionUtil.getAcademicYearId(newAcademicYear,universityId);
+				
+							// System.out.println("academic year id"+academicYearId);
+							// lblAmount.setText(String.valueOf(scholarAmt));
+							
+							//show data after  choosing academic year;
+							showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id FROM students s,enrollments e where e.university_id='"+universityId+"' and e.is_active='1' and attendance_year_id='"+academicYearId+"' and s.student_id= e.student_id; ");
+							
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
+		
+		
+		
 	};
+	
+	// -----------
+	private void showScholarTransactions(String sql) {
+	    	
+	    	studentId.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, Integer>("studentId"));
+	    	
+	    	name.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("name"));
+	    	
+	    	nrc.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("nrc"));
+	    	
+	    	remark.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, TextField>("remark"));
+	    	
+	    	withdrawStatus.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, CheckBox>("withdrawStatus"));
+			
+				try {
+					tbStudentsTransactions.setItems(scholarTransactionUtil.getScholarTransactionList(sql));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    }
+	// ---------------
+
+	private void setScholarAmount(int universityId) {
+		cbAttendanceYears.getSelectionModel().selectedItemProperty().addListener((options, oldAttendanceYear, newAttendanceYear) -> {
+	        ScholarAmountModel scholarAmountModel = new ScholarAmountModel();  
+			int scholarAmount = scholarAmountModel.getScholarAmount(universityId, newAttendanceYear);
+			
+			lblScholarAmount.setText(scholarAmount + " Mmk");
+	    });
+	}
+
+	/* Get Attendance Years according to University */
+	private void fillAttendanceYearsOnPane(int universityId) {
+		AttendanceYearModel attendanceYearModel = new AttendanceYearModel();
+
+		/* Get data from database */
+		ObservableList<String> attendanceYears = attendanceYearModel.getAttendanceYearsByUniversityId(universityId);
+		cbAttendanceYears.setItems(attendanceYears);
+	}
 
 	private void translatePane() {
 		slide.setDuration(Duration.seconds(0.3));
@@ -160,43 +266,65 @@ public class TransactionController implements Initializable {
 
 		apTransactionsPage.setTranslateY(-30);
 	}
-	
-    @FXML
-    void processFilter(ActionEvent event) {
-    	currentSelectedYear = cbYears.getSelectionModel().getSelectedItem();
-    	currentSelectedMonth = cbMonths.getSelectionModel().getSelectedItem();
-    	
-    	if (currentSelectedYear != null && currentSelectedMonth != null) {
-    		lblErrorMsgOnTransactionPage.setText("");
-    		
+
+	@FXML
+	void processFilter(ActionEvent event) {
+		currentSelectedYear = cbYears.getSelectionModel().getSelectedItem();
+		currentSelectedMonth = cbMonths.getSelectionModel().getSelectedItem();
+
+		if (currentSelectedYear != null && currentSelectedMonth != null) {
+			lblErrorMsgOnTransactionPage.setText("");
+
 			/* Mutate Month */
 			String month = String.valueOf(MutateMonth.getNumericMonth(currentSelectedMonth));
-		
-			/* load data into university table */
-			loadUniversityTable(currentSelectedYear, month);			
-		}
-    	else {
-    		lblErrorMsgOnTransactionPage.setText("Please select both year and month.");
-    		lblErrorMsgOnTransactionPage.setStyle("-fx-text-fill: #FF0000");
-    	}
-    }
 
+			/* load data into university table */
+			loadUniversityTable(currentSelectedYear, month);
+		} else {
+			lblErrorMsgOnTransactionPage.setText("Please select both year and month.");
+			lblErrorMsgOnTransactionPage.setStyle("-fx-text-fill: #FF0000");
+		}
+	}
+
+	/* Confirm btn */
+	@FXML
+	void processSave(ActionEvent event) throws SQLException {
+		//change date;
+    	//update description
+		ObservableList<ScholarTransaction> checkedScholarTransactionList = FXCollections.observableArrayList();
+
+		for (ScholarTransaction scholarTransaction : tbStudentsTransactions.getItems()) {
+			if (scholarTransaction.getWithdrawStatus().isSelected()) {
+				// update Date
+				scholarTransactionUtil.updateScholarTransactionDate(scholarTransaction);
+				// update text field
+				scholarTransactionUtil.updateScholarTransactionDescription(scholarTransaction);
+				//update 
+				
+				checkedScholarTransactionList.add(scholarTransaction);
+			}
+		}
+
+		tbStudentsTransactions.getItems().removeAll(checkedScholarTransactionList);
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* ဓသဓေသLoading years data to year combo box */
-		ObservableList<String> years = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016", "2015");
+		ObservableList<String> years = FXCollections.observableArrayList("2020", "2019", "2018", "2017", "2016",
+				"2015");
 		cbYears.setItems(years);
 
 		/* ဓသဓေသLoading months data to month combo box */
 		ObservableList<String> months = FXCollections.observableArrayList("January", "February", "March", "April",
 				"May", "June", "July", "August", "September", "October", "November", "December");
 		cbMonths.setItems(months);
-		
+
 		/* Initially, set combo boxs to default value */
 		cbYears.getSelectionModel().select("2015");
 		cbMonths.getSelectionModel().select("December");
-		
-		loadUniversityTable("2015", "12");	
+
+		loadUniversityTable("2015", "12");
 
 		/* deteact double click on table row */
 		detectDoubleClickOnTableRow();
