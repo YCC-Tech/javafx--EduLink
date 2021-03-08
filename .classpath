@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX11"/>
 	<classpathentry kind="lib" path="src/libs/jmetro-11.6.14.jar"/>
 	<classpathentry kind="lib" path="src/libs/javafxblur.jar"/>
+	<classpathentry kind="lib" path="src/libs/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

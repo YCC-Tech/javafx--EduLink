@@ -29,6 +29,11 @@
 	-fx-padding: 5;
 	-fx-background-radius: 50%;
 }
+
+.btn-secondary {
+	-fx-background-color: #CEE7F7;
+	-fx-text-fill: #1990E0;
+}
 /* End - Utilities Classes */
 
 @font-face {
@@ -279,6 +284,17 @@
 
 .panelSlide {
 	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0.0, 0.0);
+}
+
+.iconFilter {
+	-icon-paint: #c0c0c0;
+    -fx-background-color: -icon-paint;
+    -size: 22;
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+	-fx-shape: "m14 24a1 1 0 0 1 -.6-.2l-4-3a1 1 0 0 1 -.4-.8v-5.62l-7.016-7.893a3.9 3.9 0 0 1 2.916-6.487h14.2a3.9 3.9 0 0 1 2.913 6.488l-7.013 7.892v8.62a1 1 0 0 1 -1 1zm-3-4.5 2 1.5v-7a1 1 0 0 1 .253-.664l7.268-8.177a1.9 1.9 0 0 0 -1.421-3.159h-14.2a1.9 1.9 0 0 0 -1.421 3.158l7.269 8.178a1 1 0 0 1 .252.664z"
 }
 /* END - Transaction Page */
 
