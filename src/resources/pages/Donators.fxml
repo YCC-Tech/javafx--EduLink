@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -234,180 +235,116 @@
             <String fx:value="drop-shadow" />
          </styleClass>
       </AnchorPane>
-      <AnchorPane fx:id="apTab" layoutX="169.0" layoutY="4.0" prefHeight="555.0" prefWidth="613.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="apTab" layoutX="91.0" prefHeight="336.0" prefWidth="613.0" style="-fx-background-color: white;">
          <styleClass>
             <String fx:value="bg-white" />
             <String fx:value="apUpTransaction" />
             <String fx:value="drop-shadow" />
          </styleClass>
          <children>
-            <TabPane prefHeight="558.0" prefWidth="613.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutY="-2.0" prefHeight="361.0" prefWidth="613.0" styleClass="drop-shadow" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Detail Information">
+                <Tab style="-fx-font-weight: bold;" text="Detail Information">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="349.0" style="-fx-background-color: white;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="294.0" prefWidth="613.0" style="-fx-background-color: white;">
                            <children>
-                              <Button layoutX="231.0" layoutY="330.0" mnemonicParsing="false" onAction="#processEditDonator" prefHeight="30.0" prefWidth="122.0" style="-fx-background-color: #1a97eb;" text="Edit Information" textFill="WHITE">
+                              <Label layoutX="21.0" layoutY="25.0" style="-fx-text-fill: #1A97EB;" styleClass="text-medium" text="Personal Information">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="19.0" layoutY="50.0" prefHeight="0.0" prefWidth="68.0" />
+                              <Label layoutX="22.0" layoutY="68.0" styleClass="text-secondary" text="Name" />
+                              <Label fx:id="txtNameHistory" layoutX="22.0" layoutY="85.0" styleClass="text-medium" text="Htet Phyo Naing">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
-                              </Button>
-                              <GridPane layoutX="6.0" layoutY="14.0" prefHeight="288.0" prefWidth="599.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="135.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="638.0" minWidth="10.0" prefWidth="162.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="638.0" minWidth="10.0" prefWidth="192.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="638.0" minWidth="10.0" prefWidth="124.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="185.0" text="Donator Id     :  ">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="252.0" text="Name     :     " GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="254.0" text="Phone     :    " GridPane.rowIndex="3">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="250.0" text="Region     :     " GridPane.rowIndex="4">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="176.0" text="Full Address     :    " GridPane.rowIndex="5">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="251.0" text="Last Donated Date     :     " GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="258.0" text="Last Donated Amount     :    " GridPane.columnIndex="2" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="211.0" text="Total Donated Amount     :    " GridPane.columnIndex="2" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="249.0" text="Total Donated Time     :   " GridPane.columnIndex="2" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtIdHistory" prefHeight="30.0" prefWidth="163.0" text="Sample Id" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtNameHistory" prefHeight="30.0" prefWidth="300.0" text="Sample name" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtPhoneHistory" prefHeight="30.0" prefWidth="300.0" text="Sample Phone" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtRegionHistory" prefHeight="30.0" prefWidth="300.0" text="Sample Region" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtAddressHistory" prefHeight="47.0" prefWidth="165.0" text="Sample Full Address" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtLastDonateDate" prefHeight="30.0" prefWidth="300.0" text="Sample date" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtLastDonateAmount" prefHeight="30.0" prefWidth="300.0" text="Sample Amount" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtTotalAmount" prefHeight="30.0" prefWidth="300.0" text="Sample " GridPane.columnIndex="3" GridPane.rowIndex="4">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="txtTotalTime" prefHeight="30.0" prefWidth="300.0" text="Sample Time" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="181.0" text="Personal" textFill="#1a97eb" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" layoutX="152.0" layoutY="45.0" prefHeight="30.0" prefWidth="186.0" text="Donation" textFill="#1a97eb" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </GridPane>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="117.0" styleClass="text-secondary" text="Phone Number" />
+                              <Label fx:id="txtPhoneHistory" layoutX="22.0" layoutY="134.0" styleClass="text-medium" text="09-767682526">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="161.0" styleClass="text-secondary" text="Region" />
+                              <Label fx:id="txtRegionHistory" layoutX="22.0" layoutY="178.0" styleClass="text-medium" text="Ayeyarwady Region">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="206.0" styleClass="text-secondary" text="Contact Address" />
+                              <Label fx:id="txtAddressHistory" layoutX="22.0" layoutY="223.0" styleClass="text-medium" text="No.18. Myanaung, Ayeyarwady Region">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="352.0" layoutY="24.0" style="-fx-text-fill: #1A97EB;" styleClass="text-medium" text="Donation Summary">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="350.0" layoutY="49.0" prefHeight="8.0" prefWidth="68.0" />
+                              <Label layoutX="353.0" layoutY="115.0" styleClass="text-secondary" text="Last Donated Date" />
+                              <Label fx:id="txtLastDonateDate" layoutX="353.0" layoutY="132.0" styleClass="text-medium" text="2021-01-30">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="352.0" layoutY="159.0" styleClass="text-secondary" text="Last Donated Amount" />
+                              <Label fx:id="txtLastDonateAmount" layoutX="351.0" layoutY="176.0" styleClass="text-medium" text="500000 Mmk">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="352.0" layoutY="203.0" styleClass="text-secondary" text="Total Donated Amount" />
+                              <Label fx:id="txtTotalAmount" layoutX="351.0" layoutY="220.0" styleClass="text-medium" text="3500000 Mmk">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="352.0" layoutY="251.0" styleClass="text-secondary" text="Total Donated Times" />
+                              <Label fx:id="txtTotalTime" layoutX="352.0" layoutY="267.0" styleClass="text-medium" text="8 times">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="353.0" layoutY="68.0" styleClass="text-secondary" text="Donator Serial Number" />
+                              <Label fx:id="txtIdHistory" layoutX="354.0" layoutY="85.0" styleClass="text-medium" text="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Donation History">
+                <Tab style="-fx-font-weight: bold;" text="Donation History">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                            <children>
-                              <TableView fx:id="tbHistory" layoutY="79.0" prefHeight="479.0" prefWidth="613.0">
+                              <TableView fx:id="tbHistory" layoutX="23.0" layoutY="79.0" prefHeight="228.0" prefWidth="564.0">
                                 <columns>
-                                  <TableColumn fx:id="clHistoryDate" prefWidth="166.0" text="Date" />
-                                    <TableColumn fx:id="clHistoryAmount" prefWidth="189.0" text="Amount" />
-                                    <TableColumn fx:id="clHistoryDescription" prefWidth="257.0" text="Description" />
+                                  <TableColumn fx:id="clHistoryDate" prefWidth="119.0" text="Date" />
+                                    <TableColumn fx:id="clHistoryAmount" minWidth="1.0" prefWidth="178.0" text="Amount" />
+                                    <TableColumn fx:id="clHistoryDescription" prefWidth="256.0" text="Description" />
                                 </columns>
                               </TableView>
-                              <TextField fx:id="tfSearchHistory" layoutX="4.0" layoutY="46.0" prefHeight="25.0" prefWidth="278.0" promptText="Search" />
-                              <GridPane layoutX="376.0" layoutY="40.0" prefHeight="37.0" prefWidth="240.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="144.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="103.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="139.0" text="Name : " />
-                                    <Label fx:id="txtHistoryName" prefHeight="17.0" prefWidth="94.0" text="Sample Name" GridPane.columnIndex="1" />
-                                 </children>
-                              </GridPane>
+                              <TextField fx:id="tfSearchHistory" layoutX="387.0" layoutY="36.0" prefHeight="30.0" prefWidth="200.0" promptText="Search" />
+                              <Label layoutX="24.0" layoutY="31.0" styleClass="text-secondary" text="Name" />
+                              <Label fx:id="txtHistoryName" layoutX="24.0" layoutY="48.0" styleClass="text-medium" text="Htet Phyo Naing">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
               </tabs>
             </TabPane>
-            <Pane layoutX="587.0" layoutY="2.0" onMouseClicked="#processCloseDonationHistory" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: red;" styleClass="rounded">
+            <Pane layoutX="565.0" layoutY="4.0" onMouseClicked="#processCloseDonationHistory" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #CCCCCC;" styleClass="rounded">
                <children>
-                  <Pane layoutX="8.0" layoutY="8.0" onMouseClicked="#processCloseDonationHistory" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
+                  <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseDonationHistory" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
                </children>
             </Pane>
          </children>
