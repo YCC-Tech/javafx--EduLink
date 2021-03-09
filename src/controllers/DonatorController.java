@@ -242,7 +242,7 @@ public class DonatorController implements Initializable{
     @FXML
     void processCloseDonationHistory(MouseEvent event) {
     	
-    	slide.setDuration(Duration.seconds(0.5));
+    	slide.setDuration(Duration.seconds(0.2));
     	slide.setNode(apTab);
     	
     	slide.setToY(-700);
@@ -262,7 +262,7 @@ public class DonatorController implements Initializable{
     	txtNewDonatorAmount.clear();
     	taNewDescription.clear();
     	
-    	slide.setDuration(Duration.seconds(0.5));
+    	slide.setDuration(Duration.seconds(0.2));
     	slide.setNode(apNewDonatorApplicationForm);
     	
     	slide.setToY(-700);
@@ -290,7 +290,7 @@ public class DonatorController implements Initializable{
     	txtAmount.clear();
     	txtDescription.clear();
     	
-    	slide.setDuration(Duration.seconds(0.5));
+    	slide.setDuration(Duration.seconds(0.2));
     	slide.setNode(apTransactionsPage);
     	
     	slide.setToY(-700);

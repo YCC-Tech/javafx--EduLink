@@ -17,6 +17,12 @@
 	-fx-font-size: 17px;
 }
 
+.text-primary-h1 {
+	-fx-text-fill: #1A97EB;
+	-fx-font-family: "Cerebri Sans";
+	-fx-font-size: 20px;
+}
+
 .text-secondary {
 	-fx-text-fill: #87898B;
 	-fx-font-family: "Cerebri Sans" !important;
@@ -68,6 +74,11 @@
 .btn-secondary {
 	-fx-background-color: #CEE7F7;
 	-fx-text-fill: #1990E0;
+}
+
+.btn-primary {
+	-fx-background-color: #1990E0;
+	-fx-text-fill: white;
 }
 /* End - Utilities Classes */
 
