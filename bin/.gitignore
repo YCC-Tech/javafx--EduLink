@@ -1,8 +1,5 @@
-/DBConnection/
-/database/
-/models/
-/controllers/
 /resources/
-/Utilities/
+/controllers/
 /dto/
+/models/
 /application/
