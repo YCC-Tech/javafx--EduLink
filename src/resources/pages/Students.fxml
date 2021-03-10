@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -148,27 +149,28 @@
          <center>
 			<AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="200.0" styleClass="contentArea" BorderPane.alignment="CENTER">
 				<children>
-                  <TableView fx:id="tbStu" layoutX="7.0" layoutY="79.0" prefHeight="505.0" prefWidth="766.0">
+                  <TableView fx:id="tbStu" layoutX="13.0" layoutY="48.0" onMouseClicked="#processClickOnStudentTable" prefHeight="529.0" prefWidth="766.0">
                     <columns>
-                      <TableColumn fx:id="tbcolNo" prefWidth="41.0" text="No." />
-                      <TableColumn fx:id="tbcolName" prefWidth="125.0" text="Name" />
-                        <TableColumn fx:id="tbcolAttYear" prefWidth="100.0" text="Attendence Year" />
-                        <TableColumn fx:id="tbcolMajor" prefWidth="159.0" text="Major" />
-                        <TableColumn fx:id="tbcolUniverstiy" minWidth="0.0" prefWidth="171.0" text="University" />
-                        <TableColumn fx:id="tbcolPhno" minWidth="0.0" prefWidth="98.0" text="Phone no." />
-                        <TableColumn fx:id="tbcolDetail" prefWidth="71.0" text="Deatil Info" />
+                      <TableColumn fx:id="tbcolNo" prefWidth="59.0" text="No." />
+                      <TableColumn fx:id="tbcolName" prefWidth="154.0" text="Name" />
+                        <TableColumn fx:id="tbcolAttYear" prefWidth="181.0" text="Attendence Year" />
+                        <TableColumn fx:id="tbcolMajor" prefWidth="101.0" text="Major" />
+                        <TableColumn fx:id="tbcolUniverstiy" minWidth="0.0" prefWidth="110.0" text="University" />
+                        <TableColumn fx:id="tbcolPhno" minWidth="0.0" prefWidth="141.0" text="Phone No." />
                     </columns>
                   </TableView>
-                  <Button layoutX="710.0" layoutY="13.0" mnemonicParsing="false" onAction="#processAddStu" prefHeight="30.0" prefWidth="70.0" text="Add New" />
-                  <TextField fx:id="tfSearchStu" layoutX="501.0" layoutY="13.0" prefHeight="30.0" prefWidth="200.0" promptText="Search" />
-                  <ComboBox fx:id="cobUniversity" layoutX="14.0" layoutY="13.0" prefHeight="30.0" prefWidth="200.0" promptText="University" />
-                  <ComboBox fx:id="cobAttYear" layoutX="226.0" layoutY="13.0" prefHeight="30.0" prefWidth="200.0" promptText="Attendance Year" />
-                  <Button layoutX="432.0" layoutY="13.0" mnemonicParsing="false" onAction="#processFilter" prefHeight="30.0" prefWidth="60.0" text="Filter" />
+                  <TextField fx:id="tfSearchStu" layoutX="637.0" layoutY="6.0" prefHeight="30.0" prefWidth="141.0" promptText="Search" />
+                  <ComboBox fx:id="cobUniversity" layoutX="268.0" layoutY="6.0" prefHeight="30.0" prefWidth="136.0" promptText="University" />
+                  <ComboBox fx:id="cobAttYear" layoutX="408.0" layoutY="6.0" prefHeight="30.0" prefWidth="158.0" promptText="Attendance Year" />
+                  <Button layoutX="570.0" layoutY="6.0" mnemonicParsing="false" onAction="#processFilter" prefHeight="30.0" prefWidth="60.0" text="Filter" />
+                  <Button layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#processAddStu" prefHeight="30.0" prefWidth="70.0" styleClass="btn-primary" text="Add New" />
+                  <Button fx:id="btnUpdate" layoutX="90.0" layoutY="6.0" mnemonicParsing="false" onAction="#processShowUpdateForm" prefHeight="30.0" text="Update" />
+                  <Button fx:id="btnDelete" layoutX="154.0" layoutY="6.0" mnemonicParsing="false" prefHeight="30.0" text="Delete" />
 				</children>
 			</AnchorPane>
          </center>
 	</BorderPane>
-      <AnchorPane fx:id="apNewStudentPage" layoutX="268.0" layoutY="38.0" prefHeight="617.0" prefWidth="721.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="apNewStudentPage" layoutX="223.0" layoutY="25.0" prefHeight="624.0" prefWidth="766.0" style="-fx-background-color: white;">
          <styleClass>
             <String fx:value="apUpTransaction" />
             <String fx:value="bg-white" />
@@ -176,77 +178,193 @@
             <String fx:value="border-sm" />
          </styleClass>
          <children>
-            <Pane layoutX="688.0" layoutY="13.0" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
+            <Pane layoutX="732.0" layoutY="12.0" onMouseClicked="#processCloseAddNewStudentPage" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
                <children>
-                  <Pane layoutX="8.0" layoutY="8.0" prefHeight="30.0" prefWidth="29.0" styleClass="btn-close-sm" />
+                  <Pane layoutX="8.0" layoutY="8.0" onMouseClicked="#processCloseAddNewStudentPage" prefHeight="30.0" prefWidth="29.0" styleClass="btn-close-sm" />
                </children>
             </Pane>
-            <Label layoutX="98.0" layoutY="36.0" prefHeight="20.0" prefWidth="193.0" text="Personal Information">
+            <Label layoutX="36.0" layoutY="54.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Personal Information">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="8.0" layoutY="-2.0" prefHeight="32.0" prefWidth="226.0" text="Add New Student">
+            <Label layoutX="36.0" layoutY="19.0" prefHeight="32.0" prefWidth="226.0" styleClass="text-primary-h1" text="Add New Student">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="499.0" layoutY="149.0" text="Parent Information">
+            <Label layoutX="38.0" layoutY="407.0" styleClass="text-secondary" text="Parent Information">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="66.0" prefHeight="17.0" prefWidth="37.0" text="photo" />
-            <Button layoutX="626.0" layoutY="559.0" mnemonicParsing="false" onAction="#processSave" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Save" textFill="WHITE" />
-            <Label layoutX="101.0" layoutY="80.0" prefHeight="17.0" prefWidth="37.0" text="Name" />
-            <TextField fx:id="tfName" layoutX="101.0" layoutY="97.0" prefHeight="25.0" prefWidth="193.0" />
-            <Label layoutX="13.0" layoutY="138.0" prefHeight="17.0" prefWidth="54.0" text="University" />
-            <ComboBox fx:id="cobUniversity1" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="282.0" />
-            <Label layoutX="14.0" layoutY="191.0" prefHeight="17.0" prefWidth="26.0" text="Year" />
-            <ComboBox fx:id="cobYear" layoutX="13.0" layoutY="208.0" prefHeight="25.0" prefWidth="108.0" />
-            <Label layoutX="131.0" layoutY="191.0" prefHeight="17.0" prefWidth="38.0" text="Major" />
-            <ComboBox fx:id="cobMajor" layoutX="132.0" layoutY="208.0" prefHeight="25.0" prefWidth="161.0" />
-            <Label layoutX="14.0" layoutY="241.0" prefHeight="17.0" prefWidth="26.0" text="NRC" />
-            <ComboBox fx:id="cobNRCNo" layoutX="8.0" layoutY="258.0" prefHeight="25.0" prefWidth="37.0" />
-            <ComboBox fx:id="cobNRCTownship" layoutX="59.0" layoutY="258.0" prefHeight="25.0" prefWidth="77.0" />
-            <ComboBox fx:id="cobNRCNational" layoutX="136.0" layoutY="258.0" prefHeight="25.0" prefWidth="57.0" />
-            <TextField fx:id="tfNRCNo" layoutX="195.0" layoutY="258.0" prefHeight="25.0" prefWidth="101.0" />
-            <Label layoutX="13.0" layoutY="294.0" prefHeight="17.0" prefWidth="39.0" text="Gender" />
-            <ComboBox fx:id="cobGender" layoutX="9.0" layoutY="312.0" prefHeight="25.0" prefWidth="102.0" />
-            <Label layoutX="115.0" layoutY="293.0" prefHeight="17.0" prefWidth="57.0" text="Birthday" />
-            <DatePicker fx:id="dpBirthday" layoutX="115.0" layoutY="312.0" prefHeight="25.0" prefWidth="183.0" />
-            <Label layoutX="16.0" layoutY="450.0" prefHeight="17.0" prefWidth="39.0" text="Phone" />
-            <TextField fx:id="tfPhone" layoutX="17.0" layoutY="470.0" prefHeight="25.0" prefWidth="282.0" />
-            <Label layoutX="16.0" layoutY="499.0" prefHeight="17.0" prefWidth="85.0" text="Hostel Address" />
-            <TextArea fx:id="taHostelAdd" layoutX="14.0" layoutY="520.0" prefHeight="71.0" prefWidth="285.0" />
-            <Label layoutX="13.0" layoutY="399.0" prefHeight="17.0" prefWidth="44.0" text="Region" />
-            <ComboBox fx:id="cobRegion" layoutX="13.0" layoutY="422.0" prefHeight="25.0" prefWidth="140.0" />
-            <Label layoutX="158.0" layoutY="399.0" prefHeight="17.0" prefWidth="55.0" text="Township" />
-            <ComboBox fx:id="cobTownship" layoutX="159.0" layoutY="422.0" prefHeight="25.0" prefWidth="141.0" />
-            <Label layoutX="390.0" layoutY="236.0" prefHeight="17.0" prefWidth="91.0" text="Mother's Name" />
-            <Label layoutX="390.0" layoutY="178.0" prefHeight="17.0" prefWidth="77.0" text="Father's Name" />
-            <TextField fx:id="tfFatherName" layoutX="390.0" layoutY="200.0" />
-            <TextField fx:id="tfMotherName" layoutX="390.0" layoutY="257.0" />
-            <TextField fx:id="tfFatherPhone" layoutX="551.0" layoutY="200.0" />
-            <TextField fx:id="tfMotherPhone" layoutX="551.0" layoutY="257.0" />
-            <Label layoutX="553.0" layoutY="178.0" text="Phone" />
-            <Label layoutX="555.0" layoutY="235.0" text="Phone" />
-            <Label layoutX="390.0" layoutY="287.0" prefHeight="17.0" prefWidth="77.0" text="Father's Job" />
-            <Label layoutX="390.0" layoutY="339.0" prefHeight="17.0" prefWidth="77.0" text="Mother's Job" />
-            <TextField fx:id="tfFatherJob" layoutX="390.0" layoutY="310.0" prefHeight="25.0" prefWidth="309.0" />
-            <TextField fx:id="tfMotherJob" layoutX="390.0" layoutY="360.0" prefHeight="25.0" prefWidth="308.0" />
-            <Label layoutX="390.0" layoutY="448.0" prefHeight="17.0" prefWidth="100.0" text="Parent's Address" />
-            <TextArea fx:id="taAddress" layoutX="384.0" layoutY="58.0" prefHeight="78.0" prefWidth="310.0" />
-            <Button layoutX="386.0" layoutY="559.0" mnemonicParsing="false" onAction="#processCancel" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: gray; -fx-text-fill: #1A97EB;" text="Cancel" textFill="WHITE" />
-            <Label layoutX="15.0" layoutY="345.0" prefHeight="17.0" prefWidth="51.0" text="ethcinity" />
-            <Label layoutX="163.0" layoutY="344.0" prefHeight="17.0" prefWidth="61.0" text="religion" />
-            <ComboBox fx:id="cobEthcinity" layoutX="14.0" layoutY="364.0" prefHeight="25.0" prefWidth="144.0" />
-            <ComboBox fx:id="cobReligion" layoutX="162.0" layoutY="364.0" prefHeight="25.0" prefWidth="136.0" />
-            <Label layoutX="384.0" layoutY="36.0" prefHeight="17.0" prefWidth="63.0" text="Address" />
-            <TextArea fx:id="taParAddress" layoutX="386.0" layoutY="472.0" prefHeight="78.0" prefWidth="310.0" />
-            <Label layoutX="390.0" layoutY="395.0" text="Township" />
-            <ComboBox fx:id="cobParTownship" layoutX="390.0" layoutY="416.0" prefHeight="25.0" prefWidth="308.0" />
-            <Button layoutX="510.0" layoutY="559.0" mnemonicParsing="false" onAction="#processClear" prefHeight="25.0" prefWidth="69.0" text="Clear" />
+            <Button layoutX="596.0" layoutY="572.0" mnemonicParsing="false" onAction="#processSave" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Save" textFill="WHITE" />
+            <Label layoutX="198.0" layoutY="88.0" prefHeight="17.0" prefWidth="37.0" styleClass="text-secondary" text="Name" />
+            <TextField fx:id="tfName" layoutX="197.0" layoutY="107.0" prefHeight="25.0" prefWidth="173.0" />
+            <Label layoutX="39.0" layoutY="275.0" prefHeight="17.0" prefWidth="54.0" styleClass="text-secondary" text="University" />
+            <ComboBox fx:id="cobUniversity1" layoutX="39.0" layoutY="299.0" prefHeight="25.0" prefWidth="226.0" />
+            <Label layoutX="38.0" layoutY="328.0" prefHeight="17.0" prefWidth="26.0" styleClass="text-secondary" text="Year" />
+            <ComboBox fx:id="cobYear" layoutX="38.0" layoutY="345.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="145.0" layoutY="328.0" prefHeight="17.0" prefWidth="38.0" styleClass="text-secondary" text="Major" />
+            <ComboBox fx:id="cobMajor" layoutX="144.0" layoutY="345.0" prefHeight="25.0" prefWidth="121.0" />
+            <Label layoutX="198.0" layoutY="137.0" prefHeight="17.0" prefWidth="26.0" styleClass="text-secondary" text="NRC" />
+            <ComboBox fx:id="cobNRCNo" layoutX="197.0" layoutY="154.0" prefHeight="25.0" prefWidth="37.0" />
+            <ComboBox fx:id="cobNRCTownship" layoutX="252.0" layoutY="154.0" prefHeight="25.0" prefWidth="57.0" />
+            <ComboBox fx:id="cobNRCNational" layoutX="314.0" layoutY="154.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfNRCNo" layoutX="377.0" layoutY="154.0" prefHeight="25.0" prefWidth="77.0" />
+            <Label layoutX="199.0" layoutY="187.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Gender" />
+            <ComboBox fx:id="cobGender" layoutX="197.0" layoutY="205.0" prefHeight="25.0" prefWidth="91.0" />
+            <Label layoutX="297.0" layoutY="187.0" prefHeight="17.0" prefWidth="57.0" styleClass="text-secondary" text="Birthday" />
+            <DatePicker fx:id="dpBirthday" layoutX="296.0" layoutY="206.0" prefHeight="25.0" prefWidth="160.0" />
+            <Label layoutX="285.0" layoutY="278.0" prefHeight="17.0" prefWidth="39.0" styleClass="text-secondary" text="Phone" />
+            <TextField fx:id="tfPhone" layoutX="284.0" layoutY="296.0" prefHeight="25.0" prefWidth="209.0" />
+            <Label layoutX="505.0" layoutY="249.0" prefHeight="17.0" prefWidth="85.0" styleClass="text-secondary" text="Hostel Address" />
+            <TextArea fx:id="taHostelAdd" layoutX="504.0" layoutY="268.0" prefHeight="37.0" prefWidth="209.0" />
+            <Label layoutX="285.0" layoutY="324.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Region" />
+            <ComboBox fx:id="cobRegion" layoutX="284.0" layoutY="344.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="391.0" layoutY="325.0" prefHeight="17.0" prefWidth="55.0" styleClass="text-secondary" text="Township" />
+            <ComboBox fx:id="cobTownship" layoutX="392.0" layoutY="344.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="40.0" layoutY="499.0" prefHeight="17.0" prefWidth="91.0" styleClass="text-secondary" text="Mother's Name" />
+            <Label layoutX="40.0" layoutY="441.0" prefHeight="17.0" prefWidth="85.0" styleClass="text-secondary" text="Father's Name" />
+            <TextField fx:id="tfFatherName" layoutX="40.0" layoutY="463.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfMotherName" layoutX="40.0" layoutY="520.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfFatherPhone" layoutX="201.0" layoutY="463.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfMotherPhone" layoutX="201.0" layoutY="519.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="203.0" layoutY="441.0" styleClass="text-secondary" text="Father Phone" />
+            <Label layoutX="205.0" layoutY="498.0" styleClass="text-secondary" text="Mother Phone" />
+            <Label layoutX="43.0" layoutY="553.0" prefHeight="17.0" prefWidth="77.0" styleClass="text-secondary" text="Father's Job" />
+            <Label layoutX="204.0" layoutY="551.0" prefHeight="17.0" prefWidth="77.0" styleClass="text-secondary" text="Mother's Job" />
+            <TextField fx:id="tfFatherJob" layoutX="40.0" layoutY="573.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfMotherJob" layoutX="201.0" layoutY="573.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="394.0" layoutY="500.0" prefHeight="17.0" prefWidth="100.0" styleClass="text-secondary" text="Parent's Address" />
+            <TextArea fx:id="taAddress" layoutX="504.0" layoutY="332.0" prefHeight="38.0" prefWidth="209.0" />
+            <Label layoutX="506.0" layoutY="132.0" prefHeight="17.0" prefWidth="51.0" styleClass="text-secondary" text="Ethcinity" />
+            <Label layoutX="506.0" layoutY="184.0" prefHeight="17.0" prefWidth="61.0" styleClass="text-secondary" text="Religion" />
+            <ComboBox fx:id="cobEthcinity" layoutX="505.0" layoutY="151.0" prefHeight="25.0" prefWidth="151.0" />
+            <ComboBox fx:id="cobReligion" layoutX="505.0" layoutY="204.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="505.0" layoutY="313.0" prefHeight="17.0" prefWidth="108.0" styleClass="text-secondary" text="Contact Address" />
+            <TextArea fx:id="taParAddress" layoutX="394.0" layoutY="520.0" prefHeight="17.0" prefWidth="310.0" />
+            <Label layoutX="503.0" layoutY="440.0" styleClass="text-secondary" text="Township" />
+            <ComboBox fx:id="cobParTownship" layoutX="502.0" layoutY="463.0" prefHeight="25.0" prefWidth="100.0" />
+            <Button layoutX="519.0" layoutY="572.0" mnemonicParsing="false" onAction="#processClear" prefHeight="25.0" prefWidth="69.0" text="Clear" />
+            <ImageView fitHeight="144.0" fitWidth="141.0" layoutX="38.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/image_placeholder.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="36.0" layoutY="51.0" prefWidth="200.0" />
+            <Label layoutX="36.0" layoutY="249.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Educational Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="284.0" layoutY="249.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Contact">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="38.0" layoutY="393.0" prefHeight="3.0" prefWidth="133.0" />
+            <Label layoutX="391.0" layoutY="441.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Region" />
+            <ComboBox fx:id="cobRegion1" layoutX="393.0" layoutY="463.0" prefHeight="25.0" prefWidth="100.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apUpdateStudentPage" layoutX="223.0" layoutY="25.0" prefHeight="624.0" prefWidth="766.0" style="-fx-background-color: white;">
+         <styleClass>
+            <String fx:value="apUpTransaction" />
+            <String fx:value="bg-white" />
+            <String fx:value="drop-shadow" />
+            <String fx:value="border-sm" />
+         </styleClass>
+         <children>
+            <Pane layoutX="732.0" layoutY="12.0" onMouseClicked="#processCloseUpdateStudentPage" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
+               <children>
+                  <Pane layoutX="8.0" layoutY="8.0" onMouseClicked="#processCloseUpdateStudentPage" prefHeight="30.0" prefWidth="29.0" styleClass="btn-close-sm" />
+               </children>
+            </Pane>
+            <Label layoutX="36.0" layoutY="54.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Personal Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="19.0" prefHeight="32.0" prefWidth="226.0" styleClass="text-primary-h1" text="Update Student">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="407.0" styleClass="text-secondary" text="Parent Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="596.0" layoutY="572.0" mnemonicParsing="false" onAction="#processUpdate" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #1A97EB; -fx-text-fill: white;" text="Update" textFill="WHITE" />
+            <Label layoutX="198.0" layoutY="88.0" prefHeight="17.0" prefWidth="37.0" styleClass="text-secondary" text="Name" />
+            <Label layoutX="39.0" layoutY="275.0" prefHeight="17.0" prefWidth="54.0" styleClass="text-secondary" text="University" />
+            <ComboBox fx:id="cobUpdateUniversity" layoutX="39.0" layoutY="299.0" prefHeight="25.0" prefWidth="226.0" />
+            <Label layoutX="38.0" layoutY="328.0" prefHeight="17.0" prefWidth="26.0" styleClass="text-secondary" text="Year" />
+            <ComboBox fx:id="cobUpdateYear" layoutX="38.0" layoutY="345.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="145.0" layoutY="328.0" prefHeight="17.0" prefWidth="38.0" styleClass="text-secondary" text="Major" />
+            <ComboBox fx:id="cobUpdateMajor" layoutX="144.0" layoutY="345.0" prefHeight="25.0" prefWidth="121.0" />
+            <Label layoutX="198.0" layoutY="137.0" prefHeight="17.0" prefWidth="26.0" styleClass="text-secondary" text="NRC" />
+            <ComboBox fx:id="cobUpdateNRCNo" layoutX="197.0" layoutY="154.0" prefHeight="25.0" prefWidth="57.0" />
+            <ComboBox fx:id="cobUpdateNRCTownship" layoutX="259.0" layoutY="154.0" prefHeight="25.0" prefWidth="85.0" />
+            <ComboBox fx:id="cobUpdateNRCNational" layoutX="349.0" layoutY="154.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfUpdateNRCNo" layoutX="412.0" layoutY="154.0" prefHeight="25.0" prefWidth="77.0" />
+            <Label layoutX="199.0" layoutY="187.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Gender" />
+            <ComboBox fx:id="cobUpdateGender" layoutX="197.0" layoutY="205.0" prefHeight="25.0" prefWidth="91.0" />
+            <Label layoutX="297.0" layoutY="187.0" prefHeight="17.0" prefWidth="57.0" styleClass="text-secondary" text="Birthday" />
+            <DatePicker fx:id="dpUpdateBirthday" layoutX="296.0" layoutY="206.0" prefHeight="25.0" prefWidth="193.0" />
+            <Label layoutX="285.0" layoutY="278.0" prefHeight="17.0" prefWidth="39.0" styleClass="text-secondary" text="Phone" />
+            <TextField fx:id="tfUpdatePhone" layoutX="284.0" layoutY="296.0" prefHeight="25.0" prefWidth="209.0" />
+            <Label layoutX="505.0" layoutY="249.0" prefHeight="17.0" prefWidth="85.0" styleClass="text-secondary" text="Hostel Address" />
+            <TextArea fx:id="taUpdateHostelAdd" layoutX="504.0" layoutY="268.0" prefHeight="37.0" prefWidth="209.0" />
+            <Label layoutX="285.0" layoutY="324.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Region" />
+            <ComboBox fx:id="cobUpdateRegion" layoutX="284.0" layoutY="344.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="391.0" layoutY="325.0" prefHeight="17.0" prefWidth="55.0" styleClass="text-secondary" text="Township" />
+            <ComboBox fx:id="cobUpdateTownship" layoutX="392.0" layoutY="344.0" prefHeight="25.0" prefWidth="100.0" />
+            <Label layoutX="40.0" layoutY="499.0" prefHeight="17.0" prefWidth="91.0" styleClass="text-secondary" text="Mother's Name" />
+            <Label layoutX="40.0" layoutY="441.0" prefHeight="17.0" prefWidth="85.0" styleClass="text-secondary" text="Father's Name" />
+            <TextField fx:id="tfUpdateFatherName" layoutX="40.0" layoutY="463.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfUpdateMotherName" layoutX="40.0" layoutY="520.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfUpdateFatherPhone" layoutX="201.0" layoutY="463.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfUpdateMotherPhone" layoutX="201.0" layoutY="519.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="203.0" layoutY="441.0" styleClass="text-secondary" text="Father Phone" />
+            <Label layoutX="205.0" layoutY="498.0" styleClass="text-secondary" text="Mother Phone" />
+            <Label layoutX="43.0" layoutY="553.0" prefHeight="17.0" prefWidth="77.0" styleClass="text-secondary" text="Father's Job" />
+            <Label layoutX="204.0" layoutY="551.0" prefHeight="17.0" prefWidth="77.0" styleClass="text-secondary" text="Mother's Job" />
+            <TextField fx:id="tfUpdateFatherJob" layoutX="40.0" layoutY="573.0" prefHeight="25.0" prefWidth="151.0" />
+            <TextField fx:id="tfUpdateMotherJob" layoutX="201.0" layoutY="573.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="394.0" layoutY="500.0" prefHeight="17.0" prefWidth="100.0" styleClass="text-secondary" text="Parent's Address" />
+            <TextArea fx:id="taUpdateAddress" layoutX="504.0" layoutY="332.0" prefHeight="38.0" prefWidth="209.0" />
+            <Label layoutX="506.0" layoutY="132.0" prefHeight="17.0" prefWidth="51.0" styleClass="text-secondary" text="Ethcinity" />
+            <Label layoutX="506.0" layoutY="184.0" prefHeight="17.0" prefWidth="61.0" styleClass="text-secondary" text="Religion" />
+            <ComboBox fx:id="cobUpdateEthcinity" layoutX="505.0" layoutY="151.0" prefHeight="25.0" prefWidth="151.0" />
+            <ComboBox fx:id="cobUpdateReligion" layoutX="505.0" layoutY="204.0" prefHeight="25.0" prefWidth="151.0" />
+            <Label layoutX="505.0" layoutY="313.0" prefHeight="17.0" prefWidth="108.0" styleClass="text-secondary" text="Contact Address" />
+            <TextArea fx:id="taUpdateParAddress" layoutX="394.0" layoutY="520.0" prefHeight="17.0" prefWidth="310.0" />
+            <Label layoutX="503.0" layoutY="440.0" styleClass="text-secondary" text="Township" />
+            <ComboBox fx:id="cobUpdateParTownship" layoutX="502.0" layoutY="463.0" prefHeight="25.0" prefWidth="100.0" />
+            <Button layoutX="519.0" layoutY="572.0" mnemonicParsing="false" onAction="#processClearUpdateForm" prefHeight="25.0" prefWidth="69.0" text="Clear" />
+            <ImageView fitHeight="144.0" fitWidth="141.0" layoutX="38.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/image_placeholder.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="36.0" layoutY="51.0" prefWidth="200.0" />
+            <Label layoutX="36.0" layoutY="249.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Educational Information">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="284.0" layoutY="249.0" prefHeight="20.0" prefWidth="193.0" styleClass="text-secondary" text="Contact">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="38.0" layoutY="393.0" prefHeight="3.0" prefWidth="675.0" />
+            <Label layoutX="393.0" layoutY="441.0" prefHeight="17.0" prefWidth="44.0" styleClass="text-secondary" text="Region" />
+            <ComboBox fx:id="cobUpdateParRegion" layoutX="393.0" layoutY="463.0" prefHeight="25.0" prefWidth="100.0" />
+            <TextField fx:id="tfUpdateName" layoutX="197.0" layoutY="107.0" prefHeight="25.0" prefWidth="173.0" />
+            <Label fx:id="lblUpdateStudentId" layoutX="215.0" layoutY="58.0" text="student_id" />
          </children>
       </AnchorPane>
 	</children>

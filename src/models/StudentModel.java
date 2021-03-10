@@ -81,9 +81,9 @@ public class StudentModel {
 		
 		String sql = "SELECT "
 				+ "s.*, "
-				+ "u.name as university, "
+				+ "u.short_name as university, "
 				+ "a.name as attendance_year, "
-				+ "m.name as major "
+				+ "m.short_name as major "
 				+ "FROM students s "
 				+ "JOIN enrollments e ON s.student_id = e.student_id "
 				+ "JOIN attendance_years a ON e.attendance_year_id = a.attendance_year_id "
@@ -152,4 +152,75 @@ public class StudentModel {
 				
 				return students;
 			}
+
+	public ObservableList<Student> getStudentInfoForUpdate(int studentId) {
+		
+		ObservableList<Student> student = FXCollections.observableArrayList();
+		
+		String sql = "SELECT "
+				+ "s.*, "
+				+ "e.name as ethcinity, "
+				+ "r.name as religion, "
+				+ "t.name as township, "
+				+ "re.name as region "
+				+ "FROM students s "
+				+ "JOIN ethcinities e ON e.ethcinity_id = s.ethcinity_id "
+				+ "JOIN religions r ON r.religion_id = s.religion_id "
+				+ "JOIN townships t ON t.township_id = s.township_id "
+				+ "JOIN regions re ON re.region_id = t.region_id "
+				+ "WHERE s.student_id = " + studentId + ";";
+
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				student.add(new Student(
+						resultSet.getString("name"),
+						resultSet.getInt("gender"),
+						resultSet.getString("nrc"),
+						resultSet.getString("birthday").toString(),
+						resultSet.getString("phone").toString(),
+						resultSet.getString("address"),
+						resultSet.getString("hostel_address"),
+						resultSet.getString("religion"),
+						resultSet.getString("region"),
+						resultSet.getString("township"),
+						resultSet.getString("ethcinity")
+						)
+						);
+					}
+				} 
+				catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+		
+		return student;
+	}
+
+	public int updateStudent(Student student, int studentId) {
+		
+		int updated = 0;
+		
+		String sql = "UPDATE students SET "
+				+ "name = '" + student.getName() + "', "
+				+ "gender = " + student.getGender() + ", "
+				+ "nrc = '" + student.getNrc() + "', "
+				+ "birthday = '" + student.getBirthday() + "', "
+				+ "phone = '" + student.getPhone() + "', "
+				+ "address = '" + student.getAddress() + "', "
+				+ "hostel_address = '" + student.getHostel_address() + "', "
+				+ "religion_id = " + student.getReligion_id() + ", "
+				+ "township_id = " + student.getTownship_id() + ", "
+				+ "ethcinity_id = " + student.getEthcinity_id() + " "
+				+ "WHERE student_id = " + studentId + ";";
+		
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			updated = statement.executeUpdate();
 		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return updated;
+	}
+}

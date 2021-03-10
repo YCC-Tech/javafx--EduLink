@@ -1,6 +1,7 @@
 package dto;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Enrollment {
 	
@@ -10,6 +11,10 @@ public class Enrollment {
 	private SimpleIntegerProperty attendance_year_id;
 	private SimpleIntegerProperty is_active;
 	private SimpleIntegerProperty university_id;
+	
+	private SimpleStringProperty major;
+	private SimpleStringProperty attendance_year;
+	private SimpleStringProperty university;
 	
 	//for new student form 
 		public Enrollment(Integer student_id,Integer university_id,Integer attendance_year_id,Integer major_id,Integer is_active ) {
@@ -23,6 +28,26 @@ public class Enrollment {
 			
 			
 		}
+		
+		//for update student form 
+				public Enrollment(String major, String university, String attendance_year) {
+					super();
+					this.major = new SimpleStringProperty(major);
+					this.attendance_year = new SimpleStringProperty(attendance_year);
+					this.university = new SimpleStringProperty(university);
+				}
+				
+				public String getMajor() {
+					return major.get();
+				}
+				
+				public String getAttendanceYear() {
+					return attendance_year.get();
+				}
+				
+				public String getUniversity() {
+					return university.get();
+				}
 	
 	
 	public Integer getEnrollment_id() {

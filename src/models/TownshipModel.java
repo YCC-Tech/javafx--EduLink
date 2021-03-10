@@ -60,5 +60,21 @@ public class TownshipModel {
 			return townshipList;
 			
 		}
+		
+		//get township name from db to township combo box
+				public ObservableList<String> getShortTownshipList(String sql) throws SQLException{
+					ObservableList<String> townshipList = FXCollections.observableArrayList();
+					connection = DBConnection.getConnection();
+					stmt = connection.createStatement();
+					rs = stmt.executeQuery(sql);
+					
+					while(rs.next()) {
+						townshipList.add(rs.getString("short_name")
+								);
+					}
+					System.out.println(townshipList);
+					return townshipList;
+					
+				}
 
 }

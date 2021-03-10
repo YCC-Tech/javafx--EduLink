@@ -7,6 +7,9 @@ import java.sql.SQLException;
 
 import database.DBConnection;
 import dto.Parent1;
+import dto.Student;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 public class ParentModel {
 	
 	private final DBConnection dbConnection;
@@ -45,6 +48,68 @@ public class ParentModel {
 		return isSave;
 		
 		
+	}
+
+	public ObservableList<Parent1> getParentInfoForUpdate(int studentId) {
+		ObservableList<Parent1> parent = FXCollections.observableArrayList();
+		
+		String sql = "SELECT "
+				+ "p.*, "
+				+ "t.name as township, "
+				+ "re.name as region "
+				+ "FROM parents p "
+				+ "JOIN townships t ON t.township_id = p.parent_township_id "
+				+ "JOIN regions re ON re.region_id = t.region_id "
+				+ "WHERE p.student_id = " + studentId + ";";
+
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			resultSet = statement.executeQuery();
+			
+			while (resultSet.next()) {
+				parent.add(new Parent1(
+						resultSet.getInt("student_id"),
+						resultSet.getString("father_name"),
+						resultSet.getString("father_job"),
+						resultSet.getString("mother_name"),
+						resultSet.getString("mother_job"),
+						resultSet.getString("father_phone"),
+						resultSet.getString("mother_phone"),
+						resultSet.getString("parent_address"),
+						resultSet.getString("township"),
+						resultSet.getString("region")
+						)
+						);
+					}
+				} 
+				catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+		
+		return parent;
+	}
+
+	public int updateStudent(Parent1 parent, int studentId) {
+		int updated = 0;
+		
+		String sql = "UPDATE parents SET "
+				+ "father_name = '" + parent.getFather_name() + "', "
+				+ "father_job = '" + parent.getFather_job() + "', "
+				+ "father_phone = '" + parent.getFather_phone() + "', "
+				+ "mother_name = '" + parent.getMother_name() + "', "
+				+ "mother_job = '" + parent.getMother_job() + "', "
+				+ "mother_phone = '" + parent.getMother_phone() + "', "
+				+ "parent_address = '" + parent.getParent_address() + "', "
+				+ "parent_township_id = '" + parent.getParent_township_id() + "' "
+				+ "WHERE student_id = " + studentId + ";";
+		
+		try (PreparedStatement statement = connection.prepareStatement(sql)) {
+			updated = statement.executeUpdate();
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return updated;
 	}
 
 }
