@@ -1,0 +1,13 @@
+    @FXML
+    void processFilter(ActionEvent event) throws SQLException {
+    	Integer university_id,attendance_year_id;
+    	
+    	university_id = universityModel.getUniverstiyId(cobUniversity.getValue());
+    	attendance_year_id = attendanceYearModel.getYearId(cobAttYear.getValue(), university_id);
+    	
+    	
+    	System.out.println("uni id"+university_id);
+    	System.out.println("year id"+attendance_year_id);
+    	showStudentTable(university_id, attendance_year_id);
+
+    }
