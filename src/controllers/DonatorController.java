@@ -1,14 +1,12 @@
 package controllers;
 
 import java.io.IOException;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import dto.Donation;
 import dto.Donator;
-import dto.University;
 import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,10 +16,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -30,7 +26,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import models.DonatorModel;
 import javafx.scene.control.Label;
@@ -92,6 +87,12 @@ public class DonatorController implements Initializable{
 
     @FXML
     private ComboBox<String> cobTownship;
+    
+    @FXML
+    private ComboBox<String> cobUpdateDivision;
+
+    @FXML
+    private ComboBox<String> cobUpdateTownship;
 
     @FXML
     private TextArea taFullAddress;
@@ -124,9 +125,6 @@ public class DonatorController implements Initializable{
     private TableColumn<Donation, String> clHistoryDescription;
 
     @FXML
-    private TextField tfSearchHistory;
-
-    @FXML
     private Label txtHistoryName;
     
     @FXML
@@ -155,7 +153,24 @@ public class DonatorController implements Initializable{
 
     @FXML
     private Label txtTotalTime;
+    
+    @FXML
+    private AnchorPane apUpdateDonatorForm;
 
+    @FXML
+    private Label txtUpdateDate;
+
+    @FXML
+    private TextField txtUpdateName;
+
+    @FXML
+    private TextField txtUpdatePhone;
+
+    @FXML
+    private TextArea taUpdateAddress;
+
+    @FXML
+    private Button btnUpdateDonator;
 
     private final DonatorModel donatorModel = new DonatorModel();
     
@@ -167,26 +182,30 @@ public class DonatorController implements Initializable{
     
     String region;
     
+    String updatedTownship;
+    
+    String updatedRegion;
+    
     String monthId;
     
     int donationCount;
     
-    //New Donator Button
+    int donatorUpdatedId;
+    
+    //New Donator 
+    
+    //Add New Donator Button from first page
     @FXML
     void processNewDonator(ActionEvent event) throws SQLException {
     	
-    	//txtIdNo.setText(donatorModel.lastAddedDonatorId()+"");
     	txtDate.setText(LocalDate.now().toString());
-
     	translatePane(apNewDonatorApplicationForm);
-    	
-    	
     }
     
-    //New Donator Form Save Button
+    //New Donator Form's Save Button
     @FXML
     void processSaveNewDonator(ActionEvent event) throws SQLException, IOException {
-
+    	
     	Donator donator = new Donator(txtNewDonatorName.getText(),txtNewDonatorPhone.getText(),
     			region + township + taFullAddress.getText(),0);
     	
@@ -197,7 +216,7 @@ public class DonatorController implements Initializable{
     		System.out.println(" Saved new donator! ");
     		
     		int donatorId = donatorModel.lastAddedDonatorId().getDonatorId();
-        	donatorModel.donatorCount(donatorId);
+        	donatorModel.increaseDonationCount(donatorId);
     		LocalDate date = LocalDate.now();
         	Donation donation = new Donation(donatorId,Integer.parseInt(txtNewDonatorAmount.getText()), 
         			date.toString(), taNewDescription.getText().trim());
@@ -214,13 +233,7 @@ public class DonatorController implements Initializable{
     		System.out.println(" Save new donator Failed! ");
     	}
     	
-    	slide.setDuration(Duration.seconds(0.5));
-    	slide.setNode(apNewDonatorApplicationForm);
-    	
-    	slide.setToY(-700);
-    	slide.play();
-    	
-    	apNewDonatorApplicationForm.setTranslateY(-30);
+    	closePane(apNewDonatorApplicationForm);
     	
     	showDonatorTable("select * from donators;"); // to refresh table 
     	
@@ -229,27 +242,8 @@ public class DonatorController implements Initializable{
     	taFullAddress.clear();
     	txtNewDonatorAmount.clear();
     	taNewDescription.clear();
-    	// cbMonth.getSelectionModel().clearSelection();
     	cbMonth.setPromptText("Month");
-    }
-    
-    //Edit Donator Form
-    @FXML
-    void processEditDonator(ActionEvent event) {
-
-    }
-    
-    @FXML
-    void processCloseDonationHistory(MouseEvent event) {
-    	
-    	slide.setDuration(Duration.seconds(0.2));
-    	slide.setNode(apTab);
-    	
-    	slide.setToY(-700);
-    	slide.play();
-    	
-    	apTab.setTranslateY(-30);
-    	
+    	cbDonationTime.setPromptText("Donation Time");
     }
     
     //close new donator form
@@ -262,17 +256,15 @@ public class DonatorController implements Initializable{
     	txtNewDonatorAmount.clear();
     	taNewDescription.clear();
     	
-    	slide.setDuration(Duration.seconds(0.2));
-    	slide.setNode(apNewDonatorApplicationForm);
-    	
-    	slide.setToY(-700);
-    	slide.play();
-    	
-    	apNewDonatorApplicationForm.setTranslateY(-30);
+    	closePane(apNewDonatorApplicationForm);
     	
     }
+    //End of New Donator 
     
-    //New Donation Button
+    
+    //New Donation
+    
+    //New Donation Button from first page 
     @FXML
     void processNewDonation(ActionEvent event) throws IOException {
 
@@ -283,24 +275,7 @@ public class DonatorController implements Initializable{
 		 translatePane(apTransactionsPage);
     }
     
-    //New Donation Page Close
-    @FXML
-    void processNewDonationClose(MouseEvent event) {
-
-    	txtAmount.clear();
-    	txtDescription.clear();
-    	
-    	slide.setDuration(Duration.seconds(0.2));
-    	slide.setNode(apTransactionsPage);
-    	
-    	slide.setToY(-700);
-    	slide.play();
-    	
-    	apTransactionsPage.setTranslateY(-30);
-    	
-    }
-    
-    //New Donation Page Donate Button
+    //New Donation Form's Donate Button
     @FXML
     void processNewDonationDonate(ActionEvent event) throws SQLException {
     	
@@ -313,7 +288,7 @@ public class DonatorController implements Initializable{
     	
     	var isSave = donatorModel.saveDonation(donation);
     	
-    	donatorModel.donatorCount(donator.getDonatorId());
+    	donatorModel.increaseDonationCount(donator.getDonatorId());
     	
     	if ( !isSave ) {
     		
@@ -324,19 +299,88 @@ public class DonatorController implements Initializable{
     		System.out.println(" Donation Fail! ");
     	}
     	
-    	slide.setDuration(Duration.seconds(0.5));
-    	slide.setNode(apTransactionsPage);
-    	
-    	slide.setToY(-700);
-    	slide.play();
-    	
-    	apTransactionsPage.setTranslateY(-30);
+    	closePane(apTransactionsPage);
     	
     	txtAmount.clear();
     	txtDescription.clear();
+
+    	cbMonth.setPromptText("Month");
+    	cbDonationTime.setPromptText("Donation Time");
     }
     
-    //Donator Detail info and donation history page visible
+    //close New Donation Page
+    @FXML
+    void processNewDonationClose(MouseEvent event) {
+
+    	txtAmount.clear();
+    	txtDescription.clear();
+    	closePane(apTransactionsPage);
+    	
+    }
+    //End of New donation 
+    
+    
+    //Update Donator
+    
+    //open update donator form 
+    @FXML
+    void processOpenUpdateForm(ActionEvent event) throws SQLException {
+
+    	translatePane(apUpdateDonatorForm);
+    	
+    	Donator donator = tbDonator.getSelectionModel().getSelectedItem();
+    	
+    	Donator donatorDB = donatorModel.getDonator(donator.getDonatorId());
+    	
+    	txtUpdateName.setText(donator.getName());
+    	txtUpdatePhone.setText(donator.getPhone());
+    	
+    	String[] array = donator.getAddress().split(",");
+		/*
+		 * for(int i = 0; i < array.length; i++ ) { System.out.println(array[i]); }
+		 */
+    	taUpdateAddress.setText(array[2]);
+    	
+    	txtUpdateDate.setText(LocalDate.now().toString());
+    	
+    	this.donatorUpdatedId = donatorDB.getDonatorId();
+    }
+    
+    //Update Donator Form's update button
+    @FXML
+    void processUpdateDonator(ActionEvent event) throws SQLException {
+    	
+    	Donator donatorUpdated = new Donator(this.donatorUpdatedId,txtUpdateName.getText(),txtUpdatePhone.getText(),
+    			updatedRegion + updatedTownship + taUpdateAddress.getText());
+		
+		var rowUpdated = donatorModel.updateDonator(donatorUpdated);
+		
+		if( rowUpdated > 0 ) {
+			System.out.println(" Donator Updated! ");
+		}
+		else {
+			System.out.println(" Donator Update Failed! ");
+		}
+		
+		closePane(apUpdateDonatorForm);
+    	
+    	showDonatorTable("select * from donators;"); // to refresh table 
+
+    	cbMonth.setPromptText("Month");
+    	cbDonationTime.setPromptText("Donation Time");
+    }
+    
+    //close Update Donator Form 
+    @FXML
+    void processCloseUpdateDonatorForm(MouseEvent event) {
+    	closePane(apUpdateDonatorForm);
+    }
+    //End of Update Donator
+    
+    
+    //Donator detail information and donation history tabs 
+    
+    //process Donator's Detail info and donation history Tabs
     private void detectDoubleClickOnTableRow() {
     	
     	tbDonator.setOnMouseClicked((MouseEvent event) -> {
@@ -350,9 +394,9 @@ public class DonatorController implements Initializable{
 				txtPhoneHistory.setText(selectedDonator.getPhone());
 				
 				String[] array = selectedDonator.getAddress().split(",");
-				for(int i = 0; i < array.length; i++ ) {
-				System.out.println(array[i]);
-				}
+				/*
+				 * for(int i = 0; i < array.length; i++ ) { System.out.println(array[i]); }
+				 */
 				txtRegionHistory.setText(array[0]);
 				
 				try {
@@ -361,7 +405,6 @@ public class DonatorController implements Initializable{
 					txtLastDonateAmount.setText(selectedDonatorDonation.getAmount() + "");
 					
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
@@ -369,7 +412,6 @@ public class DonatorController implements Initializable{
 					int totalAmount = donatorModel.totalAmountDonation(selectedDonator.getDonatorId());
 					txtTotalAmount.setText(totalAmount + "");
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
@@ -377,39 +419,37 @@ public class DonatorController implements Initializable{
 					int totalCount = donatorModel.totalDonationCount(selectedDonator.getDonatorId());
 					txtTotalTime.setText(totalCount + "");
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-
                 try {
 					showDonationHistoryTable("select * from donations where donator_id = '" + selectedDonator.getDonatorId() + "';");
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
                
-            	
             	translatePane(apTab);
             }
             else if (event.getClickCount() == 1) {
     			btnNewDonation.setVisible(true);
+    			btnUpdateDonator.setVisible(true);
 
             }
         });
     };
     
-    //Page Transaction
-    private void translatePane(Node a) {
-    	slide.setDuration(Duration.seconds(0.5));
-    	slide.setNode(a);
+    //close detail and history tabs
+    @FXML
+    void processCloseDonationHistory(MouseEvent event) {
     	
-    	slide.setToY(-30);
-    	slide.play();
-    	a.setTranslateY(-700);
+    	closePane(apTab);
     	
     }
+    //End of Donator detail information and donation history tabs 
+    
+ 
+    //Donator list and Donation list Tables
     
     //Donators List Table
     private void showDonatorTable(String sql) throws SQLException {
@@ -460,43 +500,37 @@ public class DonatorController implements Initializable{
 		clHistoryAmount.setCellValueFactory(new PropertyValueFactory<Donation,Integer>("amount"));
 		clHistoryDescription.setCellValueFactory(new PropertyValueFactory<Donation,String>("description"));
 		
-		
-		// 1. Wrap the ObservableList in a FilteredList (initially display all data).
-		FilteredList<Donation> filteredData = new FilteredList<>(donatorModel.getDonationList(sql), b -> true);
-
-		// 2. Set the filter Predicate whenever the filter changes.
-		tfSearchHistory.textProperty().addListener((observable, oldValue, newValue) -> {
-		filteredData.setPredicate(donation -> {
-		// If filter text is empty, display all persons.
-		if (newValue == null || newValue.isEmpty()) return true;
-
-			// Compare every table columns fields with lowercase filter text
-			String lowerCaseFilter = newValue.toLowerCase();
-			// Filter with all table columns
-			if (donation.getAmount() != -1) return true; 
-			else if (donation.getDonatedAt().toLowerCase().indexOf(lowerCaseFilter) != -1) return true;
-			else if (donation.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) return true;
-			else return false; // Does not match
-			});
-		
-		});
-	
-		// 3. Wrap the FilteredList in a SortedList.
-		SortedList<Donation> sortedData = new SortedList<>(filteredData);
-		
-		// 4. Bind the SortedList comparator to the TableView comparator.
-		// Otherwise, sorting the TableView would have no effect.
-		sortedData.comparatorProperty().bind(tbHistory.comparatorProperty());
-		
-		// 5. Add sorted (and filtered) data to the table.
-		tbHistory.setItems(sortedData);
-		
+		tbHistory.setItems(donatorModel.getDonationList(sql));
     }
-    //End of Donators List Table
+    //End of Donation History List Table
+    //End of Donator list and Donation list Tables
     
+    //Page Transaction
     
- 
+    //Page Transaction >> Open
+    private void translatePane(Node a) {
+    	slide.setDuration(Duration.seconds(0.5));
+    	slide.setNode(a);
+    	
+    	slide.setToY(-30);
+    	slide.play();
+    	a.setTranslateY(-700);
+    	
+    }
     
+    //Page Transaction >> Close
+    private void closePane(Node a) {
+    	slide.setDuration(Duration.seconds(0.5));
+    	slide.setNode(a);
+    	
+    	slide.setToY(-700);
+    	slide.play();
+    	
+    	a.setTranslateY(-30);
+    }
+    //End of Page Transaction
+    
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
 		
@@ -504,18 +538,25 @@ public class DonatorController implements Initializable{
 		try {
 			showDonatorTable("select * from donators; ");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//Invisible New Donation Button
+		//Invisible Button
 		btnNewDonation.setVisible(false);
+		btnUpdateDonator.setVisible(false);
 		
+		//Invisible Anchor Pane
+		apTab.setTranslateY(-700);
+		apTransactionsPage.setTranslateY(-700);
+		apNewDonatorApplicationForm.setTranslateY(-700);
+		apUpdateDonatorForm.setTranslateY(-700);
+		
+		//Visible Button
 		detectDoubleClickOnTableRow();  
 
 		
-		// Donation time combo 
-		ObservableList<String> donationTime = FXCollections.observableArrayList("1 time","2 times","3 times","4 times","5 times","6 times","7 times","8 times","9 times","10 times and above");
+		// Donation time comboBox
+		ObservableList<String> donationTime = FXCollections.observableArrayList("1 time and above","3 times and above","5 times and above","7 times and above","10 times and above");
 		
 		cbDonationTime.setItems(donationTime);
 		
@@ -525,46 +566,33 @@ public class DonatorController implements Initializable{
 			  observeRegion, String oldRegion, String newRegion) {
 			  
 				 String donationTime = cbDonationTime.getValue();
-				 System.out.println(donationTime);
+				 //System.out.println(donationTime);
 				 
 				  switch(donationTime) {
-				  case "1 time":
+				  case "1 time and above":
 					  donationCount = 1; break;
-				  case "2 times":
-					  donationCount = 2; break;
-				  case "3 times":
+				  case "3 times and above":
 					  donationCount = 3; break;
-				  case "4 times":
-					  donationCount = 4; break;
-				  case "5 times":
+				  case "5 times and above":
 					  donationCount = 5; break;
-				  case "6 times":
-					  donationCount = 6; break;
-				  case "7 times":
+				  case "7 times and above":
 					  donationCount = 7; break;
-				  case "8 times":
-					  donationCount = 8; break;
-				  case "9 times":
-					  donationCount = 9; break;
 				  case "10 times and above":
 					  donationCount = 10; break;
 				  }
 				  
 				try {
-					showDonatorTable("select donator_id, name, address, phone from donators where donation_count = '" + donationCount + "';");
+					showDonatorTable("select donator_id, name, address, phone from donators where donation_count >= '" + donationCount + "';");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
-			  
 			  } 
 		});
-		
 		//End of Donation time combo
 		
 		
-		//Month filter combo of donator list 
+		//Month filter comboBox
 		ObservableList<String> month = FXCollections.observableArrayList("January" , "February" , "March" ,
 				"April", "May" , "June", "July" , "August", "September", "October", "November", "December");
 		
@@ -576,7 +604,7 @@ public class DonatorController implements Initializable{
 			  observeRegion, String oldRegion, String newRegion) {
 			  
 				  String month = cbMonth.getValue();
-				  System.out.println(month);
+				  //System.out.println(month);
 				  switch(month) {
 				  case "January":
 					  monthId = "01"; break;
@@ -603,76 +631,106 @@ public class DonatorController implements Initializable{
 				  case "December":
 					  monthId = "12"; break;
 				  }
-				  //System.out.println(monthId);
+				  
 				  String startDate = "2021-"+monthId+"-01";
-				  //System.out.println(startDate);
 				  String endDate = "2021-"+monthId+"-31";
-				  //System.out.println(endDate);
-
+				  
 				  try {
 					showDonatorTable("SELECT donators.donator_id, donators.name, donators.address, donators.phone FROM donators INNER JOIN donations ON donators.donator_id=donations.donator_id WHERE donations.donated_at between '"+ startDate +"' and '"+ endDate + "';");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			  
 			  } 
 		});
-		//End of Month filter combo of donator list 
+		//End of Month filter comboBox
 		
-		// choose region name + township full name for New Donator Page's Address
+		
+		// choose region name + township full name for New Donator and Update Donator Forms
  		// set region list from db to UI
  		try {
  			cobDivision.setItems(donatorModel.getRegionNameList("select name from regions;"));
+ 			cobUpdateDivision.setItems(donatorModel.getRegionNameList("select name from regions;"));
  		} catch (SQLException e) {
- 			// TODO Auto-generated catch block
  			e.printStackTrace();
  		}
+ 		
+ 		//Region and Township ComboBox for New Donator Form 
  		// choose region and listen chosen region code
  		cobDivision.valueProperty().addListener(new ChangeListener<String>() {
 
  			@Override
  			public void changed(ObservableValue<? extends String> observeRegion, String oldRegion, String newRegion) {
- 				//lblRegion.setText(cobRegion.getValue());
+ 				
  				region = cobDivision.getValue() + ", ";
- 				//System.out.println(region);
  				
  				try {
  					regionId = donatorModel.getRegionId(newRegion);
  				} catch (SQLException e1) {
- 					// TODO Auto-generated catch block
  					e1.printStackTrace();
  				}
 
  				// set township name according to chosen region
  				try {
- 					//cobTownship.setValue("Choose Township");
- 					cobTownship.setItems(donatorModel.getTownshipLongList(
- 							"select name from townships where region_id='" + regionId + "';"));
+ 					cobTownship.setItems(donatorModel.getTownshipLongList("select name from townships where region_id='" + regionId + "';"));
  				} catch (SQLException e) {
 
  					e.printStackTrace();
  				}
  			}
  		});
-		cobTownship.valueProperty().addListener(new ChangeListener<String>() {
-		  
+ 		//choose township 
+ 		cobTownship.valueProperty().addListener(new ChangeListener<String>() {
+ 			  
 			  @Override public void changed(ObservableValue<? extends String>
 			  observeRegion, String oldRegion, String newRegion) {
 			  
 				  township = cobTownship.getValue() + ", "; 
-				  System.out.println(township);
+				 // System.out.println(township);
 			  
 			  } 
 		});
-		
-		//End of choose region name + township full name for New Donator Page's Address
-  
-		apTab.setTranslateY(-700);
-		apTransactionsPage.setTranslateY(-700);
-		apNewDonatorApplicationForm.setTranslateY(-700);
+ 		//End of Region and Township ComboBox for New Donator Form 
+ 		
+ 		//Region and Township ComboBox for Update Donator Form 
+ 		// choose update region and listen chosen region code
+ 		cobUpdateDivision.valueProperty().addListener(new ChangeListener<String>() {
 
-				
+ 			@Override
+ 			public void changed(ObservableValue<? extends String> observeRegion, String oldRegion, String newRegion) {
+ 				
+ 				updatedRegion = cobUpdateDivision.getValue() + ", ";
+ 				
+ 				try {
+ 					regionId = donatorModel.getRegionId(newRegion);
+ 				} catch (SQLException e1) {
+ 					e1.printStackTrace();
+ 				}
+
+ 				// set township name according to chosen region
+ 				try {
+ 					cobUpdateTownship.setItems(donatorModel.getTownshipLongList("select name from townships where region_id='" + regionId + "';"));
+ 				} catch (SQLException e) {
+
+ 					e.printStackTrace();
+ 				}
+ 			}
+ 		});
+ 		//choose update township
+		cobUpdateTownship.valueProperty().addListener(new ChangeListener<String>() {
+			  
+			  @Override public void changed(ObservableValue<? extends String>
+			  observeRegion, String oldRegion, String newRegion) {
+			  
+				  updatedTownship = cobUpdateTownship.getValue() + ", "; 
+				  //System.out.println(township);
+			  
+			  } 
+		});
+ 		//End of Region and Township ComboBox for Update Donator Form 
+
+		//End of choose region name + township full name for New Donator and Update Donator Forms
+  	
 	}
 
 }
