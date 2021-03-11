@@ -32,6 +32,19 @@ public class ReligionModel {
 		
 	}
 	
+	//get religion name from db according to religion id
+	public String getReligionName(Integer religionId) throws SQLException {
+		String religionName= "Buddhism";
+		connection = DBConnection.getConnection();
+		stmt = connection.createStatement();
+		rs = stmt.executeQuery("select name from religions where religion_id='"+religionId+"';");
+		while(rs.next()) {
+			religionName=rs.getString("name");
+			
+		}
+		return religionName;
+	}
+	
 	
 	//get religion id from db according to religion name
 	public int getReligionId(String religionName) throws SQLException {

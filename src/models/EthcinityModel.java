@@ -29,6 +29,19 @@ public class EthcinityModel {
 		return ethcinityId;
 	}
 	
+	//get ethcinity name from db according to ethcinity id
+	public String getEthcinityName(Integer ethcinityId) throws SQLException {
+		String ethcinityName= "Bamar";
+		connection = DBConnection.getConnection();
+		stmt = connection.createStatement();
+		rs = stmt.executeQuery("select name from ethcinities where ethcinity_id='"+ethcinityId+"';");
+		while(rs.next()) {
+			ethcinityName=rs.getString("name");
+			
+		}
+		return ethcinityName;
+	}
+	
 	//get ethcinity from db to ethcinity combox
 	public ObservableList<String> getEthcinityList(String sql) throws SQLException{
 		ObservableList<String> ethcinityList = FXCollections.observableArrayList();

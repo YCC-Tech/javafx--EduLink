@@ -45,7 +45,7 @@ public class EnrollmentModel {
 		pStmt.setInt(5, enrollment.getUniversity_id());
 		
 		isSave = pStmt.execute();
-		connection.close();
+//		connection.close();
 
 		return isSave;
 		

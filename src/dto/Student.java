@@ -1,10 +1,12 @@
 package dto;
 
+import java.io.File;
 import java.sql.Date;
 import java.time.LocalDate;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.image.Image;
 
 public class Student {
 
@@ -24,7 +26,10 @@ public class Student {
 	private SimpleStringProperty major;
 	private SimpleStringProperty university;
 	private SimpleStringProperty attendance_year;
-	
+
+	private File imageFile;
+	private Image userImage;
+
 	private SimpleStringProperty religion;
 	private SimpleStringProperty region;
 	private SimpleStringProperty township;
@@ -34,6 +39,14 @@ public class Student {
 	 * private String nrcPrefix; private String nrcTownship; private String
 	 * nrcNational; private String nrcNo; private String ethcinity;
 	 */
+
+	public File getImageFile() {
+		return imageFile;
+	}
+
+	public Image getUserImage() {
+		return userImage;
+	}
 
 	public String getNrc() {
 		return nrc.get();
@@ -65,8 +78,13 @@ public class Student {
 	}
 
 	// for new student form
-	public Student(String name, Integer gender_id, String nrc, String birthday, String phone, String address,
-			String hostel_address, Integer religion_id, Integer township_id, Integer ethcinity_id) {
+	public Student(
+			String name, Integer gender_id, 
+			String nrc, String birthday, 
+			String phone, String address,
+			String hostel_address, Integer religion_id, 
+			Integer township_id, Integer ethcinity_id, 
+			File imageFile) {
 		super();
 		this.name = new SimpleStringProperty(name);
 		this.gender = new SimpleIntegerProperty(gender_id);
@@ -78,9 +96,29 @@ public class Student {
 		this.religion_id = new SimpleIntegerProperty(religion_id);
 		this.township_id = new SimpleIntegerProperty(township_id);
 		this.ethcinity_id = new SimpleIntegerProperty(ethcinity_id);
-
+		this.imageFile = imageFile;
 	}
 	
+	// for process update student form
+	public Student(
+			String name, Integer gender_id, 
+			String nrc, String birthday, 
+			String phone, String address,
+			String hostel_address, Integer religion_id, 
+			Integer township_id, Integer ethcinity_id) {
+		super();
+		this.name = new SimpleStringProperty(name);
+		this.gender = new SimpleIntegerProperty(gender_id);
+		this.nrc = new SimpleStringProperty(nrc);
+		this.birthday = new SimpleStringProperty(birthday);
+		this.phone = new SimpleStringProperty(phone);
+		this.address = new SimpleStringProperty(address);
+		this.hostel_address = new SimpleStringProperty(hostel_address);
+		this.religion_id = new SimpleIntegerProperty(religion_id);
+		this.township_id = new SimpleIntegerProperty(township_id);
+		this.ethcinity_id = new SimpleIntegerProperty(ethcinity_id);
+	}
+
 	// for update student form
 	public Student(String name, Integer gender_id, String nrc, String birthday, String phone, String address,
 			String hostel_address, String religion, String region, String township, String ethcinity) {
@@ -93,12 +131,32 @@ public class Student {
 		this.address = new SimpleStringProperty(address);
 		this.hostel_address = new SimpleStringProperty(hostel_address);
 		this.religion = new SimpleStringProperty(religion);
-		this.region = new SimpleStringProperty(region);		
+		this.region = new SimpleStringProperty(region);
 		this.township = new SimpleStringProperty(township);
 		this.ethcinity = new SimpleStringProperty(ethcinity);
 
 	}
-	
+
+	// for student detail
+	public Student(Integer student_id, String name, Integer gender_id, String nrc, String birthday, String phone,
+			String address, String hostel_address, Integer religion_id, Integer township_id, Integer ethcinity_id,
+			Image userImage) {
+		super();
+		this.student_id = new SimpleIntegerProperty(student_id);
+		this.name = new SimpleStringProperty(name);
+		this.gender = new SimpleIntegerProperty(gender_id);
+		this.nrc = new SimpleStringProperty(nrc);
+		this.birthday = new SimpleStringProperty(birthday);
+		this.phone = new SimpleStringProperty(phone);
+		this.address = new SimpleStringProperty(address);
+		this.hostel_address = new SimpleStringProperty(hostel_address);
+		this.religion_id = new SimpleIntegerProperty(religion_id);
+		this.religion_id = new SimpleIntegerProperty(religion_id);
+		this.township_id = new SimpleIntegerProperty(township_id);
+		this.ethcinity_id = new SimpleIntegerProperty(ethcinity_id);
+		this.userImage = userImage;
+
+	}
 
 	public Integer getStudent_id() {
 		return student_id.get();
@@ -155,11 +213,11 @@ public class Student {
 	public Integer getEthcinity_id() {
 		return ethcinity_id.get();
 	}
-	
+
 	public String getReligion() {
 		return religion.get();
 	}
-	
+
 	public String getRegion() {
 		return region.get();
 	}

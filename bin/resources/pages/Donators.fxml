@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="574.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DonatorController">
    <children>
-      <Button fx:id="btnUpdateDonator" layoutX="113.0" layoutY="30.0" mnemonicParsing="false" onAction="#processOpenUpdateForm" prefHeight="30.0" text="Update Donator" />
+      <Button fx:id="btnUpdateDonator" layoutX="112.0" layoutY="30.0" mnemonicParsing="false" onAction="#processOpenUpdateForm" prefHeight="30.0" text="Update" />
       <TableView fx:id="tbDonator" layoutX="18.0" layoutY="72.0" maxHeight="-Infinity" prefHeight="437.0" prefWidth="757.0">
         <columns>
           <TableColumn fx:id="clNo" prefWidth="56.0" text="No." />
@@ -27,10 +27,10 @@
         </columns>
       </TableView>
       <ComboBox fx:id="cbDonationTime" layoutX="374.0" layoutY="30.0" prefHeight="30.0" prefWidth="127.0" promptText="Donation Times" />
-      <ComboBox fx:id="cbMonth" layoutX="505.0" layoutY="30.0" prefHeight="30.0" prefWidth="95.0" promptText="Month" />
+      <ComboBox fx:id="cbMonth" layoutX="505.0" layoutY="30.0" prefHeight="30.0" prefWidth="95.0" promptText="Month" visibleRowCount="15" />
       <TextField fx:id="filterField" layoutX="607.0" layoutY="30.0" prefHeight="30.0" prefWidth="168.0" promptText="Search..." />
-      <Button layoutX="18.0" layoutY="30.0" mnemonicParsing="false" onAction="#processNewDonator" prefHeight="30.0" styleClass="btn-primary" text="New Donator" />
-      <Button fx:id="btnNewDonation" layoutX="223.0" layoutY="30.0" mnemonicParsing="false" onAction="#processNewDonation" prefHeight="30.0" text="New Donation" />
+      <Button layoutX="18.0" layoutY="30.0" mnemonicParsing="false" onAction="#processNewDonator" prefHeight="30.0" styleClass="btn-primary" text="Add Donator" />
+      <Button fx:id="btnNewDonation" layoutX="177.0" layoutY="30.0" mnemonicParsing="false" onAction="#processNewDonation" prefHeight="30.0" text="New Donation" />
       <AnchorPane fx:id="apTransactionsPage" layoutX="267.0" prefHeight="319.0" prefWidth="258.0" style="-fx-background-color: white;">
          <children>
             <Pane layoutX="224.0" layoutY="10.0" onMouseClicked="#processNewDonationClose" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #E0E0E0;" styleClass="rounded">
@@ -59,6 +59,64 @@
             <String fx:value="drop-shadow" />
             <String fx:value="border-sm" />
          </styleClass>
+      </AnchorPane>
+      <AnchorPane fx:id="apNewDonatorApplicationForm" layoutX="129.0" prefHeight="532.0" prefWidth="527.0">
+         <styleClass>
+            <String fx:value="bg-white" />
+            <String fx:value="apUpTransaction" />
+            <String fx:value="drop-shadow" />
+         </styleClass>
+         <children>
+            <Pane layoutX="496.0" layoutY="11.0" onMouseClicked="#processCloseNewDonatorForm" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #CCCCCC;" styleClass="rounded">
+               <children>
+                  <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseDonationHistory" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
+               </children>
+            </Pane>
+            <Label layoutX="39.0" layoutY="32.0" styleClass="text-primary-h1" text="New Donator Application Form">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="37.0" text="Date:" />
+            <Label fx:id="txtDate" layoutX="428.0" layoutY="37.0" text="2021-03-09" />
+            <TextField fx:id="txtNewDonatorName" layoutX="39.0" layoutY="88.0" prefHeight="25.0" prefWidth="279.0" promptText="Donator's Name" />
+            <TextField fx:id="txtNewDonatorPhone" layoutX="39.0" layoutY="129.0" prefHeight="25.0" prefWidth="279.0" promptText="Phone Number" />
+            <ComboBox fx:id="cobDivision" layoutX="39.0" layoutY="170.0" prefHeight="25.0" prefWidth="135.0" promptText="Region" visibleRowCount="17" />
+            <ComboBox fx:id="cobTownship" layoutX="182.0" layoutY="170.0" prefHeight="25.0" prefWidth="135.0" promptText="Township" visibleRowCount="17" />
+            <TextArea fx:id="taFullAddress" layoutX="39.0" layoutY="212.0" prefHeight="72.0" prefWidth="279.0" promptText="Address..." />
+            <TextField fx:id="txtNewDonatorAmount" layoutX="39.0" layoutY="336.0" prefHeight="25.0" prefWidth="279.0" promptText="Donation Amount" />
+            <TextArea fx:id="taNewDescription" layoutX="39.0" layoutY="378.0" prefHeight="72.0" prefWidth="279.0" promptText="Description about donation" />
+            <Label layoutX="39.0" layoutY="67.0" styleClass="text-secondary" text="Personal Information" />
+            <Label layoutX="39.0" layoutY="313.0" styleClass="text-secondary" text="Donation Information" />
+            <Button layoutX="275.0" layoutY="465.0" mnemonicParsing="false" onAction="#processSaveNewDonator" styleClass="btn-primary" text="Save" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apUpdateDonatorForm" layoutX="129.0" prefHeight="326.0" prefWidth="527.0">
+         <styleClass>
+            <String fx:value="bg-white" />
+            <String fx:value="apUpTransaction" />
+            <String fx:value="drop-shadow" />
+         </styleClass>
+         <children>
+            <Pane layoutX="496.0" layoutY="11.0" onMouseClicked="#processCloseUpdateDonatorForm" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #CCCCCC;" styleClass="rounded">
+               <children>
+                  <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseUpdateDonatorForm" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
+               </children>
+            </Pane>
+            <Label layoutX="39.0" layoutY="32.0" styleClass="text-primary-h1" text="Update Donator Information">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="392.0" layoutY="37.0" text="Date:" />
+            <Label fx:id="txtUpdateDate" layoutX="428.0" layoutY="37.0" text="2021-03-09" />
+            <TextField fx:id="txtUpdateName" layoutX="39.0" layoutY="69.0" prefHeight="25.0" prefWidth="279.0" promptText="Donator's Name" />
+            <TextField fx:id="txtUpdatePhone" layoutX="39.0" layoutY="110.0" prefHeight="25.0" prefWidth="279.0" promptText="Phone Number" />
+            <ComboBox fx:id="cobUpdateDivision" layoutX="39.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Region" visibleRowCount="17" />
+            <ComboBox fx:id="cobUpdateTownship" layoutX="182.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Township" visibleRowCount="17" />
+            <TextArea fx:id="taUpdateAddress" layoutX="39.0" layoutY="193.0" prefHeight="72.0" prefWidth="279.0" promptText="Address..." />
+            <Button layoutX="261.0" layoutY="275.0" mnemonicParsing="false" onAction="#processUpdateDonator" styleClass="btn-primary" text="Update" />
+         </children>
       </AnchorPane>
       <AnchorPane fx:id="apTab" layoutX="91.0" layoutY="-1.0" prefHeight="336.0" prefWidth="613.0" style="-fx-background-color: white;">
          <styleClass>
@@ -171,64 +229,6 @@
                   <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseDonationHistory" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
                </children>
             </Pane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="apUpdateDonatorForm" layoutX="129.0" prefHeight="326.0" prefWidth="527.0">
-         <styleClass>
-            <String fx:value="bg-white" />
-            <String fx:value="apUpTransaction" />
-            <String fx:value="drop-shadow" />
-         </styleClass>
-         <children>
-            <Pane layoutX="496.0" layoutY="11.0" onMouseClicked="#processCloseUpdateDonatorForm" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #CCCCCC;" styleClass="rounded">
-               <children>
-                  <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseUpdateDonatorForm" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
-               </children>
-            </Pane>
-            <Label layoutX="39.0" layoutY="32.0" styleClass="text-primary-h1" text="Update Donator Information">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="392.0" layoutY="37.0" text="Date:" />
-            <Label fx:id="txtUpdateDate" layoutX="428.0" layoutY="37.0" text="2021-03-09" />
-            <TextField fx:id="txtUpdateName" layoutX="39.0" layoutY="69.0" prefHeight="25.0" prefWidth="279.0" promptText="Donator's Name" />
-            <TextField fx:id="txtUpdatePhone" layoutX="39.0" layoutY="110.0" prefHeight="25.0" prefWidth="279.0" promptText="Phone Number" />
-            <ComboBox fx:id="cobUpdateDivision" layoutX="39.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Region" />
-            <ComboBox fx:id="cobUpdateTownship" layoutX="182.0" layoutY="151.0" prefHeight="25.0" prefWidth="135.0" promptText="Township" />
-            <TextArea fx:id="taUpdateAddress" layoutX="39.0" layoutY="193.0" prefHeight="72.0" prefWidth="279.0" promptText="Address..." />
-            <Button layoutX="261.0" layoutY="275.0" mnemonicParsing="false" onAction="#processUpdateDonator" styleClass="btn-primary" text="Update" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="apNewDonatorApplicationForm" layoutX="129.0" prefHeight="532.0" prefWidth="527.0">
-         <styleClass>
-            <String fx:value="bg-white" />
-            <String fx:value="apUpTransaction" />
-            <String fx:value="drop-shadow" />
-         </styleClass>
-         <children>
-            <Pane layoutX="496.0" layoutY="11.0" onMouseClicked="#processCloseNewDonatorForm" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #CCCCCC;" styleClass="rounded">
-               <children>
-                  <Pane layoutX="6.0" layoutY="6.0" onMouseClicked="#processCloseDonationHistory" prefHeight="30.0" prefWidth="29.0" style="-fx-background-color: white;" styleClass="btn-close-sm" />
-               </children>
-            </Pane>
-            <Label layoutX="39.0" layoutY="32.0" styleClass="text-primary-h1" text="New Donator Application Form">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="392.0" layoutY="37.0" text="Date:" />
-            <Label fx:id="txtDate" layoutX="428.0" layoutY="37.0" text="2021-03-09" />
-            <TextField fx:id="txtNewDonatorName" layoutX="39.0" layoutY="88.0" prefHeight="25.0" prefWidth="279.0" promptText="Donator's Name" />
-            <TextField fx:id="txtNewDonatorPhone" layoutX="39.0" layoutY="129.0" prefHeight="25.0" prefWidth="279.0" promptText="Phone Number" />
-            <ComboBox fx:id="cobDivision" layoutX="39.0" layoutY="170.0" prefHeight="25.0" prefWidth="135.0" promptText="Region" />
-            <ComboBox fx:id="cobTownship" layoutX="182.0" layoutY="170.0" prefHeight="25.0" prefWidth="135.0" promptText="Township" />
-            <TextArea fx:id="taFullAddress" layoutX="39.0" layoutY="212.0" prefHeight="72.0" prefWidth="279.0" promptText="Address..." />
-            <TextField fx:id="txtNewDonatorAmount" layoutX="39.0" layoutY="336.0" prefHeight="25.0" prefWidth="279.0" promptText="Donation Amount" />
-            <TextArea fx:id="taNewDescription" layoutX="39.0" layoutY="378.0" prefHeight="72.0" prefWidth="279.0" promptText="Description about donation" />
-            <Label layoutX="39.0" layoutY="67.0" styleClass="text-secondary" text="Personal Information" />
-            <Label layoutX="39.0" layoutY="313.0" styleClass="text-secondary" text="Donation Information" />
-            <Button layoutX="275.0" layoutY="465.0" mnemonicParsing="false" onAction="#processSaveNewDonator" styleClass="btn-primary" text="Save" />
          </children>
       </AnchorPane>
    </children>

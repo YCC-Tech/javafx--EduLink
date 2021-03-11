@@ -9,7 +9,7 @@ public class University1 {
 	private SimpleStringProperty short_name;
 	private SimpleStringProperty region;
 	private SimpleIntegerProperty student_count;
-	
+
 	public University1(Integer id, String name, String short_name, String region, Integer count) {
 		this.university_id = new SimpleIntegerProperty(id);
 		this.name = new SimpleStringProperty(name);
@@ -33,7 +33,7 @@ public class University1 {
 	public void setName(String name) {
 		this.name.set(name);
 	}
-	
+
 	public String getShortName() {
 		return short_name.get();
 	}
@@ -57,6 +57,5 @@ public class University1 {
 	public void setStudentCount(int studentCount) {
 		this.student_count.set(studentCount);
 	}
-	
-	
+
 }

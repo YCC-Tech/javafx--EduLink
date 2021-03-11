@@ -23,6 +23,34 @@ public class ParentModel {
 		this.connection = DBConnection.getConnection();
 	}
 	
+	public Parent1 getParent(int student_id) throws SQLException{
+		
+		Parent1 parent = null;
+			
+			String sql = "select * from parents where student_id = '" + student_id + "';";
+
+			try (PreparedStatement statement = connection.prepareStatement(sql)) {
+				ResultSet resultSet = statement.executeQuery();
+				
+				while(resultSet.next()) {
+					parent = new Parent1(resultSet.getInt("student_id"),
+							resultSet.getString("father_name"),
+							resultSet.getString("father_job"),
+							resultSet.getString("father_phone"),
+							resultSet.getString("mother_name"),
+							resultSet.getString("mother_job"),
+							resultSet.getString("mother_phone"),
+							resultSet.getString("parent_address"));
+				}
+
+			} 
+			catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			
+			return parent;
+		}
+	
 	public boolean saveStudent(Parent1 parent) throws SQLException {
 		var isSave = true;
 		connection = DBConnection.getConnection();
@@ -43,7 +71,7 @@ public class ParentModel {
 		pStmt.setInt(9, parent.getParent_township_id());
 		
 		isSave = pStmt.execute();
-		connection.close();
+//		connection.close();
 
 		return isSave;
 		
