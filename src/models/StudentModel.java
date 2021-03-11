@@ -277,30 +277,46 @@ public class StudentModel {
 		return student;
 	}
 
-	public int updateStudent(Student student, int studentId) {
+	public int updateStudent(Student student, int studentId) throws FileNotFoundException, SQLException {
 		
+		connection = DBConnection.getConnection();
+
 		int updated = 0;
+
+		pStmt = connection.prepareStatement("UPDATE `students` SET "
+				+ "`name` = ?,"
+				+ " `gender` = ?, "
+				+ "`nrc` = ?,"
+				+ " `birthday` = ?, "
+				+ "`phone` = ?, "
+				+ "`address` = ?, "
+				+ "`hostel_address` = ?, "
+				+ "`religion_id` = ?, "
+				+ "`township_id` = ?, "
+				+ "`ethcinity_id` = ?, "
+				+ "`photo_url` = ? "
+				+ "WHERE (`student_id` = ?);"
+				);
 		
-		String sql = "UPDATE students SET "
-				+ "name = '" + student.getName() + "', "
-				+ "gender = " + student.getGender() + ", "
-				+ "nrc = '" + student.getNrc() + "', "
-				+ "birthday = '" + student.getBirthday() + "', "
-				+ "phone = '" + student.getPhone() + "', "
-				+ "address = '" + student.getAddress() + "', "
-				+ "hostel_address = '" + student.getHostel_address() + "', "
-				+ "religion_id = " + student.getReligion_id() + ", "
-				+ "township_id = " + student.getTownship_id() + ", "
-				+ "ethcinity_id = " + student.getEthcinity_id() + " "
-				+ "WHERE student_id = " + studentId + ";";
+		pStmt.setString(1, student.getName());
+		pStmt.setInt(2, student.getGender());
+		pStmt.setString(3, student.getNrc());
+		pStmt.setString(4, student.getBirthday());
+		pStmt.setString(5, student.getPhone());
+		pStmt.setString(6, student.getAddress());
+		pStmt.setString(7, student.getHostel_address());
+		pStmt.setInt(8, student.getReligion_id());
+		pStmt.setInt(9, student.getTownship_id());
+		pStmt.setInt(10, student.getEthcinity_id());
 		
-		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			updated = statement.executeUpdate();
-		}
-		catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+		fis = new FileInputStream(student.getImageFile());
+		pStmt.setBinaryStream(11, (InputStream)fis, (int)student.getImageFile().length());
+		pStmt.setInt(12, studentId);
 		
+
+		updated = pStmt.executeUpdate();
+//		connection.close();
+
 		return updated;
 	}
 }

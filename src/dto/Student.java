@@ -117,6 +117,7 @@ public class Student {
 		this.religion_id = new SimpleIntegerProperty(religion_id);
 		this.township_id = new SimpleIntegerProperty(township_id);
 		this.ethcinity_id = new SimpleIntegerProperty(ethcinity_id);
+		// this.imageFile = imageFile;
 	}
 
 	// for update student form

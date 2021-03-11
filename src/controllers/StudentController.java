@@ -341,6 +341,9 @@ public class StudentController implements Initializable {
 
 	@FXML
 	private Label lblUpdateStudentId;
+	
+	@FXML
+	private ImageView ivUpdateImage;
 	/* --- end Update --- */
 
 	/* --- detail info tab pane --- */
@@ -472,8 +475,10 @@ public class StudentController implements Initializable {
 	int regionId;
 
 	File imageFile;// to accept chosen image file
+	File updateImageFile;
 
 	private Image userImage; // to accept image of chosen image file
+	private Image userUpdateImage;
 	
  //11--3--
     
@@ -842,6 +847,23 @@ public class StudentController implements Initializable {
 		}
 
 	}
+	
+    @FXML
+    void processUpdateImage(MouseEvent event) {
+		// choose a file of image
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png", "*.ico"));
+		this.updateImageFile = fileChooser.showOpenDialog(null);
+		if (updateImageFile != null) {
+
+			// setting image file path to textarea
+			// taImagePath.setText(this.imageFile.getAbsolutePath());
+
+			userUpdateImage = new Image(this.updateImageFile.toURI().toString());
+
+			ivUpdateImage.setImage(userUpdateImage);
+		}
+    }
 
 	@FXML
 	void processSave(ActionEvent event) throws SQLException, FileNotFoundException {
@@ -1051,8 +1073,6 @@ public class StudentController implements Initializable {
   //11-3--load transaction history table with filter
     private void loadStudentTransactionHistory(String year,String month) throws FileNotFoundException {
     	
-    	
-    	
     	int student_id = Integer.parseInt(lblStuId.getText());
     	
     	System.out.println("Student id in year month"+student_id);
@@ -1169,7 +1189,7 @@ public class StudentController implements Initializable {
 	/* -------------------- Update Form -------------------- */
 
 	@FXML
-	void processUpdate(ActionEvent event) throws SQLException {
+	void processUpdate(ActionEvent event) throws SQLException, FileNotFoundException {
 		Integer university_id = 1;
 		Integer attendance_year_id = 1;
 		Integer major_id = 1;
@@ -1192,7 +1212,7 @@ public class StudentController implements Initializable {
 				taUpdateAddress.getText().trim(), taUpdateHostelAdd.getText().trim(),
 				religionModel.getReligionId(cobUpdateReligion.getValue()),
 				townshipModel.getTownshipId(cobUpdateTownship.getValue()),
-				ethcinityModel.getEthcinityId(cobUpdateEthcinity.getValue()));
+				ethcinityModel.getEthcinityId(cobUpdateEthcinity.getValue()), this.updateImageFile);
 
 		/* enrollment data from new student form */
 		university_id = universityModel.getUniverstiyId(cobUpdateUniversity.getValue());
@@ -1260,6 +1280,19 @@ public class StudentController implements Initializable {
 		tfUpdateName.setText(selectedData.getName());
 		tfUpdatePhone.setText(selectedData.getPhone());
 		lblUpdateStudentId.setText(String.valueOf(studentId));
+		
+		// Student student = tbStu.getSelectionModel().getSelectedItem();
+		Student studentDb = null;
+		try {
+			studentDb = studentModel.getStudent(studentId);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ivUpdateImage.setImage(studentDb.getUserImage());
 
 		StudentModel studentModel = new StudentModel();
 		ObservableList<Student> studentInformation = studentModel.getStudentInfoForUpdate(studentId);

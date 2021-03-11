@@ -8,6 +8,10 @@
 
 /* Utilities Classes */
 
+.loginUIPane {
+	-fx-background-color: #f00;
+}
+
 .link-report {
 	-fx-text-fill: #1A97EB;
 	-fx-font-family: "Cerebri Sans";
@@ -136,6 +140,14 @@
 
 .btnCloseWindow {
 	-fx-background-color: white;
+}
+
+.btnCloseWindowLogin {
+	-fx-background-color: transparent;
+}
+
+.btnCloseWindowLogin:hover {
+	-fx-background-color: #FF311E;
 }
 
 .btnCloseWindow:hover {

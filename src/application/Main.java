@@ -26,8 +26,9 @@ public class Main extends Application {
 			/* Restrict windows to be resizable */
 			primaryStage.setResizable(false);
 
-			Parent root = FXMLLoader.load(getClass().getResource("/resources/pages/Students.fxml"));
-			root.setStyle("-fx-background-color: transparent; ");
+			//Parent root = FXMLLoader.load(getClass().getResource("/resources/pages/Students.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/resources/pages/Login.fxml"));
+			// root.setStyle("-fx-background-color: transparent; ");
 
 			/* Make window to be draggable */
 			root.setOnMousePressed(new EventHandler<MouseEvent>() {

@@ -24,6 +24,9 @@ public class UniversityModel {
 	public ObservableList<University> getTransactionUniversities(String year, String month) {
 		ObservableList<University> universities = FXCollections.observableArrayList();
 		
+		System.out.println(year + " <--- year");
+		System.out.println(month + " <--- month");
+		
 		String sql = "SELECT "
 				+ "u.*, "
 				+ "r.name as region, "
@@ -33,7 +36,9 @@ public class UniversityModel {
 				+ "JOIN enrollments e ON e.university_id = u.university_id "
 				+ "JOIN transactions t ON t.student_id = e.student_id "
 				+ "WHERE u.region_id = r.region_id "
-				+ "AND t.taken_out_at between '" + year + "-" + month + "-01' AND '" + year + "-" + month + "-30' "
+				// + "AND t.taken_out_at NOT between '" + year + "-" + month + "-01' AND '" + year + "-" + month + "-30' "
+				// + "AND t.taken_out_at NOT between '" + "2015" + "-" + "12" + "-01' AND '" + "2015" + "-" + "12" + "-30' "
+				+ "AND t.taken_out_at NOT BETWEEN '" + year + "-" + month + "-01' AND '" + year + "-" + month + "-31' "
 				+ "GROUP BY university_id;";
 
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
