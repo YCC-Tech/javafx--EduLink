@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="chartPane" prefHeight="609.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChartController">
+   <children>
+      <GridPane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #e3e5e8;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#processChart" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Charts" GridPane.columnIndex="2">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#processScholarship" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Scholarship" GridPane.columnIndex="1">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#processDonation" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Donation">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <AnchorPane fx:id="showPieChartPane" layoutX="10.0" layoutY="134.0" prefHeight="463.0" prefWidth="779.0">
+         <children>
+            <PieChart fx:id="allPie" layoutX="255.0" prefHeight="467.0" prefWidth="503.0" />
+            <Label layoutX="55.0" layoutY="14.0" onMouseClicked="#processAllDonation" styleClass="link-report" text="All donation" textFill="#d323d0" underline="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="54.0" layoutY="49.0" onMouseClicked="#processThisYearDonation" styleClass="link-report" text="This year donation" textFill="#d323d0" underline="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="54.0" layoutY="85.0" onMouseClicked="#processUniveristy" styleClass="link-report" text="Universities" textFill="#d323d0" underline="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="107.0" layoutY="396.0" styleClass="text-medium" text="Chart Value:" />
+            <Label fx:id="lblChartValue" alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="383.0" prefHeight="50.0" prefWidth="131.0" styleClass="link-report" text="Value" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Text fx:id="txtChart" layoutX="294.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="482.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

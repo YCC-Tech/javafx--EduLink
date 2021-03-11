@@ -2,12 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import Utilities.MutateMonth;
 import dto.DonationDto;
 import javafx.collections.FXCollections;
@@ -18,19 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import models.ReportsModel;
 
 public class ReportController implements Initializable{
@@ -86,7 +75,7 @@ public class ReportController implements Initializable{
     }
 
     @FXML
-    void processRemainBalance(ActionEvent event) throws IOException {
+    void processChart(ActionEvent event) throws IOException {
     	
     	AnchorPane pane = FXMLLoader.load(getClass().getResource("/resources/pages/ReportChart.fxml"));
         reportPane.getChildren().setAll(pane);
@@ -108,6 +97,7 @@ public class ReportController implements Initializable{
     @FXML
     void processFilterMonth(ActionEvent event) {
 
+    	// Two dependent drop downs (Year, Month)
     	String yearString = cmbYearFilter.getValue();
     	String monthString = cmbMonthFilter.getValue();
     	Integer year = 0;
@@ -129,6 +119,7 @@ public class ReportController implements Initializable{
     @FXML
     void processFilterYear(ActionEvent event) {
 
+    	// Two dependent drop downs (Year, Month)
     	String yearString = cmbYearFilter.getValue();
     	String monthString = cmbMonthFilter.getValue();
     	Integer year = 0;
@@ -148,6 +139,7 @@ public class ReportController implements Initializable{
     	
     }
 
+    // Show Donation table
     public void showTable(ObservableList<DonationDto> dataForTable) {
     	ObservableList<DonationDto> donationList = FXCollections.observableArrayList();
     	
@@ -158,10 +150,9 @@ public class ReportController implements Initializable{
 		tblDonationPhone.setCellValueFactory(new PropertyValueFactory<DonationDto, String>("phone"));
 		tblDonationDescription.setCellValueFactory(new PropertyValueFactory<DonationDto, String>("description"));
 		
-		
-		//tblDonation.setItems(donationModel.getDonationList());
 		donationList.addAll(dataForTable);
 		
+		// For search function
 		// 1. Wrap the ObservableList in a FilteredList (initially display all data).
 		FilteredList<DonationDto> filteredData = new FilteredList<>(donationList, p -> true);
 
@@ -197,19 +188,23 @@ public class ReportController implements Initializable{
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
+		// Initialize Donation Table
 		showTable(reportModel.getDonationList(0, 0));
+		
+		// Initialize "Year" drop down
 		cmbYearFilter.getItems().add("All year");
 		cmbYearFilter.getItems().add("2015");
 		cmbYearFilter.getItems().add("2016");
 		cmbYearFilter.getItems().add("2017");
+		cmbYearFilter.getItems().add("2018");
+		cmbYearFilter.getItems().add("2019");
+		cmbYearFilter.getItems().add("2020");
 		cmbYearFilter.getItems().add("2021");
 		
-		cmbYearFilter.getSelectionModel().select(0);
+		cmbYearFilter.getSelectionModel().select(0); // All year is selected as default
 		
-		//cmbYearFilter.getSelectionModel().select(year);
-		
+		// Initialize "Month" drop down
 		cmbMonthFilter.getItems().add("All month");
 		cmbMonthFilter.getItems().add("January");
 		cmbMonthFilter.getItems().add("February");
@@ -222,9 +217,9 @@ public class ReportController implements Initializable{
 		cmbMonthFilter.getItems().add("September");
 		cmbMonthFilter.getItems().add("October");
 		cmbMonthFilter.getItems().add("November");
-		cmbMonthFilter.getItems().add("December");
+		cmbMonthFilter.getItems().add("December"); 
 		
-		cmbMonthFilter.getSelectionModel().select(0);
+		cmbMonthFilter.getSelectionModel().select(0);// All month is selected as default
 		
 		
 	}

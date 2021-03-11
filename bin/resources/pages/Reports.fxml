@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="reportPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportController">
    <children>
-      <GridPane prefHeight="49.0" prefWidth="790.0" style="-fx-background-color: #e3e5ae8;">
+      <GridPane prefHeight="49.0" prefWidth="790.0" style="-fx-background-color: #e3e5e8 #e3e5e8;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -24,38 +24,38 @@
           <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnScholarship" mnemonicParsing="false" onAction="#processScholarship" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Scholoarship" textFill="#1e1d1d" GridPane.columnIndex="1">
+            <Button fx:id="btnScholarship" mnemonicParsing="false" onAction="#processScholarship" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Scholarship" textFill="#1e1d1d" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnRemainBalance" mnemonicParsing="false" onAction="#processRemainBalance" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Remaining Balance" textFill="#1e1d1d" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#processChart" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Charts" textFill="#1e1d1d" GridPane.columnIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnDonation" mnemonicParsing="false" mouseTransparent="true" onAction="#processDonation" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Donation" textFill="#1e1d1d">
+            <Button fx:id="btnDonation" mnemonicParsing="false" mouseTransparent="true" onAction="#processDonation" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Donation" textFill="#1e1d1d">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <TextField fx:id="tfSearch" layoutX="14.0" layoutY="74.0" onAction="#processSearch" prefHeight="30.0" prefWidth="166.0" promptText="Search">
+      <TextField fx:id="tfSearch" layoutX="607.0" layoutY="66.0" onAction="#processSearch" prefHeight="30.0" prefWidth="166.0" promptText="Search">
          <font>
             <Font size="15.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="cmbYearFilter" layoutX="229.0" layoutY="75.0" onAction="#processFilterYear" prefHeight="30.0" prefWidth="150.0" promptText="Filter Year" />
-      <ComboBox fx:id="cmbMonthFilter" layoutX="427.0" layoutY="75.0" onAction="#processFilterMonth" prefHeight="30.0" prefWidth="150.0" promptText="Filter Month" />
-      <TableView fx:id="tblDonation" layoutX="14.0" layoutY="125.0" prefHeight="463.0" prefWidth="759.0" style="-fx-background-image: #e3e5ae8;">
+      <ComboBox fx:id="cmbYearFilter" layoutX="289.0" layoutY="66.0" onAction="#processFilterYear" prefHeight="30.0" prefWidth="150.0" promptText="Filter Year" />
+      <ComboBox fx:id="cmbMonthFilter" layoutX="448.0" layoutY="66.0" onAction="#processFilterMonth" prefHeight="30.0" prefWidth="150.0" promptText="Filter Month" visibleRowCount="15" />
+      <TableView fx:id="tblDonation" layoutX="14.0" layoutY="110.0" prefHeight="468.0" prefWidth="759.0" style="-fx-background-image: #e3e5ae8;">
         <columns>
           <TableColumn fx:id="tblDonationNo" prefWidth="59.0" text="No." />
           <TableColumn fx:id="tblDonationDate" prefWidth="130.0" text="Date" />
             <TableColumn fx:id="tblDonationName" prefWidth="129.0" text="Name" />
             <TableColumn fx:id="tblDonationAmount" minWidth="7.0" prefWidth="125.0" text="Amount" />
-            <TableColumn fx:id="tblDonationPhone" minWidth="0.0" prefWidth="135.0" text="Phone" />
-            <TableColumn fx:id="tblDonationDescription" prefWidth="180.0" text="Description" />
+            <TableColumn fx:id="tblDonationPhone" minWidth="0.0" prefWidth="122.0" text="Phone" />
+            <TableColumn fx:id="tblDonationDescription" prefWidth="179.0" text="Description" />
         </columns>
       </TableView>
    </children>

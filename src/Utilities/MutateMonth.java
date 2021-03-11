@@ -22,9 +22,32 @@ public class MutateMonth {
 			put("December", 12);
 		}
 	};
+	
+	private static Map<String, String> monthName = new HashMap<String, String>() {
+		private static final long serialVersionUID = 1L;
+		{
+			put("1", "January");
+			put("2", "February");
+			put("3", "March");
+			put("4", "April");
+			put("5", "May");
+			put("6", "June");
+			put("7", "July");
+			put("8", "August");
+			put("9", "September");
+			put("10", "October");
+			put("11", "November");
+			put("12", "December");
+		}
+	};
 					
 	
 	public static int getNumericMonth(String textualMonth) {
 		return months.get(textualMonth);
 	}
+					
+	public static String getStringMonth(String intMonth) {
+		return monthName.get(intMonth);
+	}
+
 }

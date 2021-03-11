@@ -7,6 +7,12 @@
 }
 
 /* Utilities Classes */
+
+.link-report {
+	-fx-text-fill: #1A97EB;
+	-fx-font-family: "Cerebri Sans";
+}
+
 .bg-white {
 	-fx-background-color: white;
 }

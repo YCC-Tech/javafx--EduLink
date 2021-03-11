@@ -4,19 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
+import Utilities.MutateMonth;
 import database.DBConnection;
-import dto.University;
 import dto.DonationDto;
 import dto.ScholarshipDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 
 public class ReportsModel {
 	
-	private Integer lastRemainingOf2020Dec = 100000;
+	//private Integer lastRemainingOf2020Dec = 100000;
 
+	// To connect to database
 	private final DBConnection dbConnection;
 	private Connection connection;
 	private ResultSet resultSet;
@@ -26,6 +27,7 @@ public class ReportsModel {
 		this.dbConnection = new DBConnection();
 		this.connection = DBConnection.getConnection();
 	}
+	
 	
 	public ObservableList<DonationDto> getDonationList(Integer year, Integer month){
 		
@@ -88,12 +90,18 @@ public class ReportsModel {
 		return donationList;
 	}
 	
-	
+	// To retrieve data about Scholarship from database
 	public  ObservableList<ScholarshipDto> getScholarshipList(Integer year, Integer month, String uniShortName){
+		
 		ObservableList<ScholarshipDto> scholarshipList = FXCollections.observableArrayList();
-		String sql="";
-		String dateString="";
+		
+		String sql=""; // to set query
+		String dateString=""; /* In the database, Date format is yyyy-mm-dd, for such these months (01 and 12)
+								 See in Utilities.MutateMonth.java
+								*/
 		String uniDateString="";
+		
+		// variable to put in queries for year and month
 		if(year!=0) {
 			dateString +=year;
 		}
@@ -110,7 +118,7 @@ public class ReportsModel {
 			dateString +="%";
 		}
 		
-		
+		// variable to put in queries for year, month and university
 		  if(uniShortName==null) { 
 			  uniDateString +=dateString;
 		  }
@@ -119,14 +127,14 @@ public class ReportsModel {
 		  }
 		 
 		if(year==0 && month==0 && uniShortName==null) {
-			System.out.println("work 1if");
+			// No drop down is selected
 			sql = "select t.transaction_id, s.name, u.name, s.phone, t.taken_out_at\r\n"
 					+ "from transactions t, students s, universities u, enrollments e, majors m\r\n"
 					+ "where t.student_id = s.student_id and s.student_id = e.student_id and e.major_id = m.major_id and m.university_id = u.university_id;";
 		}
 		
 		else {
-			System.out.println("work 4if");
+			// One of the drop downs is selected
 			sql = "select t.transaction_id, s.name, u.name, s.phone, t.taken_out_at\r\n"
 					+ "from transactions t, students s, universities u, enrollments e, majors m\r\n"
 					+ "where t.student_id = s.student_id and s.student_id = e.student_id and\r\n"
@@ -134,7 +142,7 @@ public class ReportsModel {
 					+ "t.taken_out_at like '"+uniDateString+"';";
 		}
 				
-		
+		// Prepare statement
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			resultSet = statement.executeQuery();
 			
@@ -162,21 +170,19 @@ public class ReportsModel {
 		return scholarshipList;
 	}
 	
+	// To retrieve data from universities table
 	public ObservableList<String> getUniversityList(){
 		ObservableList<String> universityList = FXCollections.observableArrayList();
 		
-		String sql = "SELECT short_name FROM universities;";
+		String sql = "SELECT short_name FROM foundation.universities;";
 				
-		
+		// Prepare statement
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			resultSet = statement.executeQuery();
-			
+			resultSet = statement.executeQuery();			
 			
 			while(resultSet.next()) {
-				
 
 				universityList.add(resultSet.getString("short_name"));
-
 			}
 			
 		} 
@@ -186,49 +192,28 @@ public class ReportsModel {
 		return universityList;
 	}
 	
-	public ObservableList<ScholarshipDto> getUniversityFilter(String short_name){
-		ObservableList<ScholarshipDto> scholarshipList = FXCollections.observableArrayList();
-		String sql="";
-		
-		if(short_name == null) {
-			sql = "select t.transaction_id, s.name, u.name, s.phone, t.taken_out_at\r\n"
-					+ "from transactions t, students s, universities u, enrollments e, majors m\r\n"
-					+ "where t.student_id = s.student_id and s.student_id = e.student_id and e.major_id = m.major_id and m.university_id = u.university_id;";
-		}
-		else {
-			sql = "select t.transaction_id, s.name, u.name, s.phone, t.taken_out_at\r\n"
-					+ "from transactions t, students s, universities u, enrollments e, majors m\r\n"
-					+ "where t.student_id = s.student_id and s.student_id = e.student_id and e.major_id = m.major_id and m.university_id = u.university_id\r\n"
-					+ "and u.short_name='"+short_name+"';";
-		}
-		
-				
-		
+	// To retrieve data from database for PieCharts
+	public ObservableList<PieChart.Data> getChartData(String sql, String firstString, String secondString, boolean isMonthNameIn){
+		 ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			resultSet = statement.executeQuery();
 			
-			Integer countNo=1;
 			while(resultSet.next()) {
-				
+	    		if (isMonthNameIn) {
+					pieData.add(new PieChart.Data(MutateMonth.getStringMonth(resultSet.getString(firstString)), resultSet.getInt(secondString)));
+				}
+				else{
+					pieData.add(new PieChart.Data(resultSet.getString(firstString), resultSet.getInt(secondString)));
+				}
 
-				scholarshipList.add(new ScholarshipDto(
-						countNo,
-						//resultSet.getInt("transaction_id"),
-						resultSet.getString("name"),
-						resultSet.getString("u.name"),
-						resultSet.getString("phone"),				
-						resultSet.getString("taken_out_at")
-						)
-				);
-				countNo++;
-
-			}
+	    	}
 			
 		} 
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return scholarshipList;
+		return pieData;
 	}
 	
 }

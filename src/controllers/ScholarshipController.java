@@ -2,16 +2,11 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import Utilities.MutateMonth;
-import dto.DonationDto;
 import dto.ScholarshipDto;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +60,7 @@ public class ScholarshipController implements Initializable{
     }
     
     @FXML
-    void processRemainBalance(ActionEvent event) throws IOException {
+    void processCharts(ActionEvent event) throws IOException {
 
     	AnchorPane pane = FXMLLoader.load(getClass().getResource("/resources/pages/ReportChart.fxml"));
     	scholarshipPane.getChildren().setAll(pane);
@@ -74,6 +69,7 @@ public class ScholarshipController implements Initializable{
     @FXML
     void processFilterMonth(ActionEvent event) {
 
+    	// Three dependent drop downs (University, Year, Month)
     	String uniShortName = cmbUniversity.getValue();
     	String yearString = cmbYear.getValue();
     	String monthString = cmbMonth.getValue();
@@ -99,7 +95,8 @@ public class ScholarshipController implements Initializable{
 
     @FXML
     void processFilterUniversity(ActionEvent event) {
-
+    	// Three dependent drop downs (University, Year, Month)
+    	
     	String uniShortName = cmbUniversity.getValue();
     	String yearString = cmbYear.getValue();
     	String monthString = cmbMonth.getValue();
@@ -124,7 +121,8 @@ public class ScholarshipController implements Initializable{
 
     @FXML
     void processFilterYear(ActionEvent event) {
-
+    	// Three dependent drop downs (University, Year, Month)
+    	
     	String uniShortName = cmbUniversity.getValue();
     	String yearString = cmbYear.getValue();
     	String monthString = cmbMonth.getValue();
@@ -147,6 +145,7 @@ public class ScholarshipController implements Initializable{
     	showTable(reportModel.getScholarshipList(year, month, uniShortName));
     	}
     
+    // To show Scholarship List
     public void showTable(ObservableList<ScholarshipDto> dataForTable) {
     	
     	tblNo.setCellValueFactory(new PropertyValueFactory<ScholarshipDto, Integer>("countNo"));
@@ -157,32 +156,33 @@ public class ScholarshipController implements Initializable{
 		
 		tblScholarship.setItems(dataForTable);
 		
-			
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Initialize table
+		// Initialize Scholarship List table
 		showTable(reportModel.getScholarshipList(0,0,null));
+		
 		//University filter
 		ObservableList<String> uniList = reportModel.getUniversityList();
 		cmbUniversity.getItems().add("All University");
 		for(String uni: uniList) {
 			cmbUniversity.getItems().add(uni);
 		}
-		cmbUniversity.getSelectionModel().select(0);
+		cmbUniversity.getSelectionModel().select(0); // All University is selected as default
 		
-		
+		//Initialize Year filter
 		cmbYear.getItems().add("All year");
 		cmbYear.getItems().add("2015");
 		cmbYear.getItems().add("2016");
 		cmbYear.getItems().add("2017");
+		cmbYear.getItems().add("2018");
+		cmbYear.getItems().add("2019");
+		cmbYear.getItems().add("2020");
 		cmbYear.getItems().add("2021");
+		cmbYear.getSelectionModel().select(0); // All year is selected as default
 		
-		cmbYear.getSelectionModel().select(0);
-		
-		//cmbYearFilter.getSelectionModel().select(year);
-		
+		// Initialize Month filter
 		cmbMonth.getItems().add("All month");
 		cmbMonth.getItems().add("January");
 		cmbMonth.getItems().add("February");
@@ -196,8 +196,7 @@ public class ScholarshipController implements Initializable{
 		cmbMonth.getItems().add("October");
 		cmbMonth.getItems().add("November");
 		cmbMonth.getItems().add("December");
-		
-		cmbMonth.getSelectionModel().select(0);
+		cmbMonth.getSelectionModel().select(0); // All month is selected as default
 	}
 
 }

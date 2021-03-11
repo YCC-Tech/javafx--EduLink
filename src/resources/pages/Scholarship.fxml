@@ -7,13 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="scholarshipPane" prefHeight="609.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ScholarshipController">
    <children>
-      <GridPane prefHeight="50.0" style="-fx-background-color: #e3e5e8;">
+      <GridPane prefHeight="50.0" prefWidth="785.0" style="-fx-background-color: #e3e5e8;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="197.5" />
@@ -24,38 +23,34 @@
           <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#processRemainBalance" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Remain Balance" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#processCharts" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Charts" GridPane.columnIndex="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Scholarship" GridPane.columnIndex="1">
+            <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Scholarship" GridPane.columnIndex="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#processDonation" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" text="Donation">
+            <Button mnemonicParsing="false" onAction="#processDonation" prefHeight="40.0" prefWidth="197.5" style="-fx-background-color: #e3e5e8;" styleClass="text-primary-h1" text="Donation">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
          </children>
       </GridPane>
-      <Pane layoutX="23.0" layoutY="145.0" prefHeight="441.0" prefWidth="748.0">
-         <children>
-            <TableView fx:id="tblScholarship" layoutX="-4.0" layoutY="-1.0" prefHeight="448.0" prefWidth="754.0">
-              <columns>
-                <TableColumn fx:id="tblNo" prefWidth="53.0" text="No." />
-                <TableColumn fx:id="tblName" prefWidth="124.0" text="Name" />
-                  <TableColumn fx:id="tblUniversity" prefWidth="309.0" text="University" />
-                  <TableColumn fx:id="tblPhone" prefWidth="118.0" text="Phone" />
-                  <TableColumn fx:id="tblTransactionDate" prefWidth="149.0" text="Transaction Date" />
-              </columns>
-            </TableView>
-         </children>
-      </Pane>
-      <ComboBox fx:id="cmbUniversity" layoutX="23.0" layoutY="77.0" onAction="#processFilterUniversity" prefWidth="150.0" promptText="Filter University" />
-      <ComboBox fx:id="cmbYear" layoutX="217.0" layoutY="77.0" onAction="#processFilterYear" prefWidth="150.0" promptText="Filter Year" />
-      <ComboBox fx:id="cmbMonth" layoutX="417.0" layoutY="77.0" onAction="#processFilterMonth" prefWidth="150.0" promptText="Filter Month" />
+      <TableView fx:id="tblScholarship" layoutX="19.0" layoutY="109.0" prefHeight="474.0" prefWidth="754.0">
+        <columns>
+          <TableColumn fx:id="tblNo" prefWidth="53.0" text="No." />
+          <TableColumn fx:id="tblName" prefWidth="131.0" text="Name" />
+            <TableColumn fx:id="tblUniversity" prefWidth="297.0" text="University" />
+            <TableColumn fx:id="tblPhone" prefWidth="115.0" text="Phone" />
+            <TableColumn fx:id="tblTransactionDate" prefWidth="143.0" text="Transaction Date" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="cmbUniversity" layoutX="308.0" layoutY="67.0" onAction="#processFilterUniversity" prefHeight="30.0" prefWidth="150.0" promptText="Filter University" />
+      <ComboBox fx:id="cmbYear" layoutX="464.0" layoutY="67.0" onAction="#processFilterYear" prefHeight="30.0" prefWidth="150.0" promptText="Filter Year" />
+      <ComboBox fx:id="cmbMonth" layoutX="620.0" layoutY="67.0" onAction="#processFilterMonth" prefHeight="30.0" prefWidth="150.0" promptText="Filter Month" visibleRowCount="15" />
    </children>
 </AnchorPane>
