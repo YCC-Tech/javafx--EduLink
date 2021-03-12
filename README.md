@@ -1,6 +1,7 @@
 # EduLink
 Education Foundation Management System using JavaFX
 
+## Features
 The system has 6 parts:
 1. Student Management
 2. Scholar Transaction Management
@@ -9,6 +10,7 @@ The system has 6 parts:
 5. User Management
 6. Settings
 
+## Tools and Languages
 Used Technologies
 - Jdk 11
 - JavaFX 11
@@ -29,6 +31,9 @@ To use the application, your machine must have Java11 and MySQL.
 - [Database Design](https://github.com/YCC-Tech/javafx--EduLink/blob/main/docs/database-design.PNG)
 - [System Flow](https://github.com/YCC-Tech/javafx--EduLink/blob/main/docs/system-flow.png)
 - [UI/UX Mockup](https://drive.google.com/file/d/1AXjpQxUp8Mc4s-TKCTxIF5Puqwj0PBxA/view?usp=sharing)
+
+## Demo Running Application
+[View on Youtube](https://youtu.be/F2s0c7C2DM0)
 
 ## Home page
 ![image-demo](https://github.com/YCC-Tech/javafx--EduLink/blob/main/docs/sample-ui.png)
