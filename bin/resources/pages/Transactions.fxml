@@ -24,14 +24,14 @@
                   <TableColumn fx:id="tbcolNo" prefWidth="55.0" styleClass="tableColumnCenterText" text="No" />
                   <TableColumn fx:id="tbcolUniversity" prefWidth="325.0" text="University" />
                   <TableColumn fx:id="tbcolUniversityShortName" minWidth="0.0" prefWidth="168.0" text="Short Name" />
-                  <TableColumn fx:id="tbcolRegion" prefWidth="94.0" text="Region" />
-                  <TableColumn fx:id="tbcolStudentCount" prefWidth="112.0" styleClass="tableColumnCenterText" text="Students" />
+                  <TableColumn fx:id="tbcolRegion" prefWidth="215.0" text="Region" />
+                  <TableColumn fx:id="tbcolStudentCount" minWidth="0.0" prefWidth="6.0" styleClass="tableColumnCenterText" text="Students" />
                </columns>
             </TableView>
             <TextField fx:id="tfSearchUniversity" layoutX="562.0" layoutY="25.0" prefHeight="30.0" prefWidth="220.0" promptText="Search . . ." />
             <Label layoutX="12.0" layoutY="318.0" prefHeight="17.0" prefWidth="194.0" text="Double click on row to view more." textFill="#979797" />
             <Label fx:id="lblErrorMsgOnTransactionPage" layoutX="250.0" layoutY="6.0" prefHeight="17.0" prefWidth="235.0" textFill="#ffa8a8" />
-            <AnchorPane fx:id="apTransactionsPage" layoutX="11.0" prefHeight="565.0" prefWidth="770.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="apTransactionsPage" layoutX="12.0" prefHeight="565.0" prefWidth="770.0" style="-fx-background-color: white;">
                <styleClass>
                   <String fx:value="apUpTransaction" />
                   <String fx:value="bg-white" />

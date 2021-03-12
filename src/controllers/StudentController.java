@@ -110,12 +110,30 @@ public class StudentController implements Initializable {
 
 	@FXML
 	private Pane adminsMenuItem;
-
+	
 	@FXML
 	private Label lblAdmins;
-
+	
 	@FXML
 	private Pane menuItemIconAdmins;
+	
+//	@FXML
+//	private Pane settingsMenuItem;
+//	
+//	@FXML
+//	private Label lblSettings;
+//
+//    @FXML
+//    private Pane menuItemIconSettings;
+	
+	  	@FXML
+	    private Pane adminsMenuItem1;
+
+	    @FXML
+	    private Label lblAdmins1;
+
+	    @FXML
+	    private Pane menuItemIconAdmins1;
 
 	@FXML
 	private AnchorPane ap;
@@ -254,8 +272,8 @@ public class StudentController implements Initializable {
 	@FXML
 	private Button btnUpdate;
 
-	@FXML
-	private Button btnDelete;
+//	@FXML
+//	private Button btnDelete;
 
 	/* --- Update --- */
 	@FXML
@@ -587,7 +605,7 @@ public class StudentController implements Initializable {
             } 
             else if (event.getClickCount() == 1) {
             	btnUpdate.setVisible(true);
-        		btnDelete.setVisible(true);
+        		// btnDelete.setVisible(true);
 
             }
     	});
@@ -1137,9 +1155,15 @@ public class StudentController implements Initializable {
 	void processAdminsMenuItem(MouseEvent event) {
 		loadPage("Admins", adminsMenuItem, lblAdmins, menuItemIconAdmins);
 	}
+	
+	@FXML
+	void processSettingsMenuItem(MouseEvent event) {
+		loadPage("Settings", adminsMenuItem1, lblAdmins1, menuItemIconAdmins1);
+	}
 
 	/* Dynamically load page based on left menu item on click */
 	private void loadPage(String page, Pane menuItem, Label menuLabel, Pane menuIcon) {
+		System.out.println(page + " my new page ----");
 		Parent root = null;
 
 		try {
@@ -1156,6 +1180,8 @@ public class StudentController implements Initializable {
 	/* Tweak left menu buttons active style */
 	private void changeMenuItemsApperance(Pane menuItem, Label menuLabel, Pane menuIcon) {
 
+		System.out.println(menuItems);
+		
 		menuItems.forEach(item -> {
 			if (item == menuItem) {
 				item.setStyle("-fx-background-color: #fff");
@@ -1554,7 +1580,7 @@ public class StudentController implements Initializable {
 		tbStu.setOnMouseClicked((MouseEvent event) -> {
 			if (event.getClickCount() == 1) {
 				btnUpdate.setVisible(true);
-				btnDelete.setVisible(true);
+				// btnDelete.setVisible(true);
 			}
 		});
 	}
@@ -1564,7 +1590,7 @@ public class StudentController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		btnUpdate.setVisible(false);
-		btnDelete.setVisible(false);
+		// btnDelete.setVisible(false);
 		lblUpdateStudentId.setVisible(false);
 		// setRegionTownship();
 
@@ -1573,19 +1599,26 @@ public class StudentController implements Initializable {
 		
 		apTab.setTranslateY(-700);
 
+		// System.out.println(settingsMenuItem.getMaxHeight());
+		
 		List<Pane> sideMenuItems = Arrays.asList(studentsMenuItem, transactionsMenuItem, donatorsMenuItem,
-				reportsMenuItem, adminsMenuItem);
+				reportsMenuItem, adminsMenuItem, adminsMenuItem1);
 		menuItems = sideMenuItems;
 
-		List<Label> sideMenuLabels = Arrays.asList(lblStudents, lblTransactions, lblDonators, lblReports, lblAdmins);
+		List<Label> sideMenuLabels = Arrays.asList(lblStudents, lblTransactions, lblDonators, lblReports, lblAdmins, lblAdmins1);
 		menuLabels = sideMenuLabels;
 
 		List<Pane> sideMenuIcons = Arrays.asList(menuItemIconStudents, menuItemIconTransactions, menuItemIconDonators,
-				menuItemIconReports, menuItemIconAdmins);
+				menuItemIconReports, menuItemIconAdmins, menuItemIconAdmins1);
 		menuIcons = sideMenuIcons;
+		
+		System.out.println("----->");
+		System.out.println(menuItems);
+		System.out.println("----->");
 
 		/* Student Tab is firstly loaded */
 		changeMenuItemsApperance(studentsMenuItem, lblStudents, menuItemIconStudents);
+		// changeMenuItemsApperance(menuItemIconSettings, lblSettings, menuItemIconSettings);
 
 		
 		

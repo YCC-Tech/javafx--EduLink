@@ -48,7 +48,7 @@ public class TransactionController implements Initializable {
 
 	@FXML
 	private TableView<ScholarTransaction> tbStudentsTransactions;
-	
+
 	@FXML
 	private TableView<University> tbUniversities;
 
@@ -78,7 +78,7 @@ public class TransactionController implements Initializable {
 
 	@FXML
 	private Label lblUniversityShortName;
-	
+
 	@FXML
 	private Label lblScholarAmount;
 
@@ -87,23 +87,23 @@ public class TransactionController implements Initializable {
 
 	@FXML
 	private Label lblErrorMsgOnTransactionPage;
-	
+
 	@FXML
-    private TableColumn<ScholarTransaction, Integer> studentId;
+	private TableColumn<ScholarTransaction, Integer> studentId;
 
-    @FXML
-    private TableColumn<ScholarTransaction, String> name;
+	@FXML
+	private TableColumn<ScholarTransaction, String> name;
 
-    @FXML
-    private TableColumn<ScholarTransaction, String>  nrc;
+	@FXML
+	private TableColumn<ScholarTransaction, String> nrc;
 
-    @FXML
-    private TableColumn<ScholarTransaction, TextField> remark;
+	@FXML
+	private TableColumn<ScholarTransaction, TextField> remark;
 
-    @FXML
-    private TableColumn<ScholarTransaction, CheckBox> withdrawStatus;
-	
-    ScholarTransactionUtil scholarTransactionUtil = new ScholarTransactionUtil();
+	@FXML
+	private TableColumn<ScholarTransaction, CheckBox> withdrawStatus;
+
+	ScholarTransactionUtil scholarTransactionUtil = new ScholarTransactionUtil();
 
 	TranslateTransition slide = new TranslateTransition();
 	private String currentSelectedYear;
@@ -159,57 +159,51 @@ public class TransactionController implements Initializable {
 		tbUniversities.setItems(sortedData);
 
 	}
-	
-private void showScholarTransactions(Integer universityId, String year, String month) {
 
-    	
-    	studentId.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, Integer>("studentId"));
-    	
-    	name.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("name"));
-    	
-    	nrc.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("nrc"));
-    	
-    	remark.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, TextField>("remark"));
-    	
-    	withdrawStatus.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, CheckBox>("withdrawStatus"));
-		
-		
-			
-			try {
-				tbStudentsTransactions.setItems(scholarTransactionUtil.getScholarTransactionList(universityId,year,month));
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
+	private void showScholarTransactions(Integer universityId, String year, String month) {
 
-    }
-        
-       //new add no1 
-		private void showScholarTransactions(Integer universityId, String year, String month,Integer attendanceYearId) {
+		studentId.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, Integer>("studentId"));
 
-        	
-        	studentId.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, Integer>("studentId"));
-        	
-        	name.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("name"));
-        	
-        	nrc.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("nrc"));
-        	
-        	remark.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, TextField>("remark"));
-        	
-        	withdrawStatus.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, CheckBox>("withdrawStatus"));
-    		
-    		
-    			
-    			try {
-    				tbStudentsTransactions.setItems(scholarTransactionUtil.getScholarTransactionList(universityId, year, month, attendanceYearId));
-    			} catch (SQLException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
-    		
+		name.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("name"));
 
-        }
+		nrc.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("nrc"));
+
+		remark.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, TextField>("remark"));
+
+		withdrawStatus.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, CheckBox>("withdrawStatus"));
+
+		try {
+			tbStudentsTransactions
+					.setItems(scholarTransactionUtil.getScholarTransactionList(universityId, year, month));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// new add no1
+	private void showScholarTransactions(Integer universityId, String year, String month, Integer attendanceYearId) {
+
+		studentId.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, Integer>("studentId"));
+
+		name.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("name"));
+
+		nrc.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, String>("nrc"));
+
+		remark.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, TextField>("remark"));
+
+		withdrawStatus.setCellValueFactory(new PropertyValueFactory<ScholarTransaction, CheckBox>("withdrawStatus"));
+
+		try {
+			tbStudentsTransactions.setItems(
+					scholarTransactionUtil.getScholarTransactionList(universityId, year, month, attendanceYearId));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	private void detectDoubleClickOnTableRow() {
 		tbUniversities.setOnMouseClicked((MouseEvent event) -> {
@@ -218,7 +212,7 @@ private void showScholarTransactions(Integer universityId, String year, String m
 
 				lblUniversityName.setText(selectedData.getName());
 				lblUniversityShortName.setText(selectedData.getShortName());
-				
+
 				int universityId = selectedData.getUniversityId();
 
 				translatePane();
@@ -226,32 +220,45 @@ private void showScholarTransactions(Integer universityId, String year, String m
 				fillAttendanceYearsOnPane(universityId);
 
 				setScholarAmount(universityId);
-				
+
 				// ---
-				// showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id FROM students s,enrollments e where e.university_id='"+ selectedData.getUniversityId() +"' and e.is_active='1' and s.student_id= e.student_id;");
-				
+				// showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id
+				// FROM students s,enrollments e where e.university_id='"+
+				// selectedData.getUniversityId() +"' and e.is_active='1' and s.student_id=
+				// e.student_id;");
+
 				currentSelectedYear = String.valueOf(cbYears.getSelectionModel().getSelectedItem());
 				currentSelectedMonth = cbMonths.getSelectionModel().getSelectedItem();
 
 				showScholarTransactions(universityId, currentSelectedYear, currentSelectedMonth);
-				
+
 				// combobox attendance year on change
 				cbAttendanceYears.valueProperty().addListener(new ChangeListener<String>() {
 
 					@Override
-					public void changed(ObservableValue<? extends String> observableValue, String oldAcademicYear, String newAcademicYear) {
-						
+					public void changed(ObservableValue<? extends String> observableValue, String oldAcademicYear,
+							String newAcademicYear) {
+
 						try {
-							// int scholarAmt = scholarTransactionUtil.getScholarAmount(universityId, newAcademicYear);
-							int academicYearId = scholarTransactionUtil.getAcademicYearId(newAcademicYear,universityId);
-				
+							// int scholarAmt = scholarTransactionUtil.getScholarAmount(universityId,
+							// newAcademicYear);
+							int academicYearId = scholarTransactionUtil.getAcademicYearId(newAcademicYear,
+									universityId);
+
 							// System.out.println("academic year id"+academicYearId);
 							// lblAmount.setText(String.valueOf(scholarAmt));
+
+							// show data after choosing academic year;
+							// showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id
+							// FROM students s,enrollments e where e.university_id='"+universityId+"' and
+							// e.is_active='1' and attendance_year_id='"+academicYearId+"' and s.student_id=
+							// e.student_id; ");
 							
-							//show data after  choosing academic year;
-							// showScholarTransactions("select s.student_id, s.name, s.nrc ,e.university_id FROM students s,enrollments e where e.university_id='"+universityId+"' and e.is_active='1' and attendance_year_id='"+academicYearId+"' and s.student_id= e.student_id; ");
-							showScholarTransactions(universityId, currentSelectedYear, currentSelectedMonth, academicYearId);
-							
+							System.out.println(currentSelectedMonth + " .___ month");
+							System.out.println(currentSelectedYear + " .___ year");
+							showScholarTransactions(universityId, currentSelectedYear, currentSelectedMonth,
+									academicYearId);
+
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -260,11 +267,9 @@ private void showScholarTransactions(Integer universityId, String year, String m
 				});
 			}
 		});
-		
-		
-		
+
 	};
-	
+
 	// -----------
 //	private void showScholarTransactions(String sql) {
 //	    	
@@ -288,12 +293,13 @@ private void showScholarTransactions(Integer universityId, String year, String m
 	// ---------------
 
 	private void setScholarAmount(int universityId) {
-		cbAttendanceYears.getSelectionModel().selectedItemProperty().addListener((options, oldAttendanceYear, newAttendanceYear) -> {
-	        ScholarAmountModel scholarAmountModel = new ScholarAmountModel();  
-			int scholarAmount = scholarAmountModel.getScholarAmount(universityId, newAttendanceYear);
-			
-			lblScholarAmount.setText(scholarAmount + " Mmk");
-	    });
+		cbAttendanceYears.getSelectionModel().selectedItemProperty()
+				.addListener((options, oldAttendanceYear, newAttendanceYear) -> {
+					ScholarAmountModel scholarAmountModel = new ScholarAmountModel();
+					int scholarAmount = scholarAmountModel.getScholarAmount(universityId, newAttendanceYear);
+
+					lblScholarAmount.setText(scholarAmount + " Mmk");
+				});
 	}
 
 	/* Get Attendance Years according to University */
@@ -348,28 +354,29 @@ private void showScholarTransactions(Integer universityId, String year, String m
 	/* Confirm btn */
 	@FXML
 	void processSave(ActionEvent event) throws SQLException {
-		//change date;
-    	//update description
+		// change date;
+		// update description
 		ObservableList<ScholarTransaction> checkedScholarTransactionList = FXCollections.observableArrayList();
 
 		for (ScholarTransaction scholarTransaction : tbStudentsTransactions.getItems()) {
 			if (scholarTransaction.getWithdrawStatus().isSelected()) {
-				//insert scholar transaction to transaction tb
+				// insert scholar transaction to transaction tb
 				currentSelectedYear = cbYears.getSelectionModel().getSelectedItem();
 				currentSelectedMonth = cbMonths.getSelectionModel().getSelectedItem();
-				
+
 				System.out.println(currentSelectedMonth);
 				System.out.println(currentSelectedYear);
-				
-				scholarTransactionUtil.insertScholarTransactionDate(scholarTransaction, currentSelectedYear, currentSelectedMonth);
-				
+
+				scholarTransactionUtil.insertScholarTransactionDate(scholarTransaction, currentSelectedYear,
+						currentSelectedMonth);
+
 				checkedScholarTransactionList.add(scholarTransaction);
 			}
 		}
 
 		tbStudentsTransactions.getItems().removeAll(checkedScholarTransactionList);
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* ဓသဓေသLoading years data to year combo box */

@@ -9,6 +9,39 @@ public class University {
 	private SimpleStringProperty short_name;
 	private SimpleStringProperty region;
 	private SimpleIntegerProperty student_count;
+
+	/* --- settings --- */
+	private SimpleIntegerProperty univeristyId;
+	private SimpleStringProperty universityLongName;
+	private SimpleStringProperty universityShortName;
+
+	public University(Integer univeristyId, String universityLongName, String universityShortName) {
+		super();
+		this.univeristyId = new SimpleIntegerProperty(univeristyId);
+		this.universityLongName = new SimpleStringProperty(universityLongName);
+		this.universityShortName = new SimpleStringProperty(universityShortName);
+	}
+
+	public University(String universityLongName, String universityShortName) {
+		super();
+		this.universityLongName = new SimpleStringProperty(universityLongName);
+		this.universityShortName = new SimpleStringProperty(universityShortName);
+	}
+
+	public Integer getUniveristyId() {
+		return univeristyId.get();
+	}
+
+	public String getUniversityLongName() {
+		return universityLongName.get();
+	}
+
+	public String getUniversityShortName() {
+		return universityShortName.get();
+	}
+
+	/* --- end settings --- */
+	
 	
 	public University(Integer id, String name, String short_name, String region, Integer count) {
 		this.university_id = new SimpleIntegerProperty(id);
@@ -33,7 +66,7 @@ public class University {
 	public void setName(String name) {
 		this.name.set(name);
 	}
-	
+
 	public String getShortName() {
 		return short_name.get();
 	}
@@ -57,6 +90,5 @@ public class University {
 	public void setStudentCount(int studentCount) {
 		this.student_count.set(studentCount);
 	}
-	
-	
+
 }

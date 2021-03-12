@@ -85,6 +85,16 @@
 									<Pane fx:id="menuItemIconAdmins" layoutX="21.0" layoutY="17.0" prefHeight="29.0" prefWidth="32.0" styleClass="adminIcon" />
 								</children>
 							</Pane>
+                        <Pane id="adminsMenuItem" fx:id="adminsMenuItem1" onMouseClicked="#processAdminsMenuItem" prefHeight="56.0" prefWidth="200.0" styleClass="leftSideMenuItem">
+                           <children>
+                              <Label fx:id="lblAdmins1" layoutX="55.0" layoutY="18.0" styleClass="leftSideMenuLabel" text="Settings">
+                                 <font>
+                                    <Font name="Oswald Regular" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Pane fx:id="menuItemIconAdmins1" layoutX="21.0" layoutY="17.0" prefHeight="29.0" prefWidth="32.0" styleClass="adminIcon" />
+                           </children>
+                        </Pane>
 						</children>
 					</VBox>
 					<Label layoutX="27.0" layoutY="559.0" styleClass="teamName" text="UT-YCC Tech" textFill="#7d6fff">
